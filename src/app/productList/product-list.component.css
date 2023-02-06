@@ -1,0 +1,10 @@
+#pl-grid {
+ margin: auto;
+ border: solid;
+ width: 80%;
+}
+
+.pl-tile {
+ border: solid;
+ overflow: visible;
+}

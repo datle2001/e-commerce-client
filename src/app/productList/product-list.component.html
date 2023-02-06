@@ -1,0 +1,24 @@
+
+<label>
+ Filter by:
+ <input type="text" [(ngModel)]="nameFilter"/>
+</label>
+
+<div>
+ <h2>{{products.length}} RESULTS</h2>
+ <label>
+  SORT BY 
+  <mat-select></mat-select>
+ </label>
+</div>
+
+<mat-grid-list cols="3" id="pl-grid" gutterSize="20px">
+ <ng-container *ngFor="let product of filteredProducts">
+  <mat-grid-tile class="pl-tile">
+   <p-root
+    [product]="product"
+   />
+   </mat-grid-tile>
+ </ng-container>
+ 
+</mat-grid-list>

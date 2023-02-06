@@ -1,0 +1,12 @@
+<h1>Your Cart 
+ <h2 style="display: inline; font-weight: lighter">
+  ({{getTotalQuant()}} items)
+ </h2>
+</h1>
+
+<div *ngFor="let product of cartService.selectedProducts">
+ <app-cart-product
+  [product]="product"
+  (onRemove)="onRemoveClick($event)"
+ />
+</div>

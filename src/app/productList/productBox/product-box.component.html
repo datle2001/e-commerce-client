@@ -1,0 +1,15 @@
+<div class="p-box">
+ <a [routerLink]="['/products', product.code]">
+  <img src={{product.photoUrl}} class="img-center" style="max-width: 70%;">
+ </a>
+ <a [routerLink]="['/products', product.code]">
+  <h3>{{product.name}}</h3>
+ </a>
+ <h4>{{product.rating}}</h4>
+ <h4>Item # {{product.code}}</h4>
+ <h5>Price {{product.price}}</h5>
+ <div>
+  <h4>Quantity</h4>
+ </div>
+ <button (click)="onAddClick()">Add to cart</button>
+</div>

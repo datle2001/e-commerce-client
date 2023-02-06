@@ -1,0 +1,19 @@
+.p-box {
+ border: 0.5px solid;
+}
+
+.img-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+
+a {
+ all:unset
+}
+
+a:hover {
+ text-decoration: underline;
+ color: lightgray;
+ cursor: pointer
+}

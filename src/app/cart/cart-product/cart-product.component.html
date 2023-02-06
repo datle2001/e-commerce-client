@@ -1,0 +1,15 @@
+<img src="./assets/gummy.png" style="width: 50px"/>
+{{product.name}}
+Item # {{product.code}}
+Quantity: {{product.quantityPick}}
+<mat-form-field appearance="fill">
+ <mat-select [(ngModel)]="selectedQuantity">
+  <mat-option *ngFor="let quantity of quantityOptions" [value]="quantity">
+   {{quantity}}
+  </mat-option>
+</mat-select>
+</mat-form-field>
+
+
+<button (click)="onRemoveClick()">Remove</button>
+Cost: {{product.quantityPick * product.price}}
