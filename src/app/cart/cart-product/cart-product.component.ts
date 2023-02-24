@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output, OnChanges } from '@angular/core';
 import { Product } from 'src/app/product/product';
-import { ProductBoxComponent } from 'src/app/productList/productBox/product-box.component';
 import { CartService } from '../cart.service';
 
 @Component({

@@ -1,10 +1,8 @@
-import { Component, OnInit, OnDestroy, Host } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Subscription } from "rxjs";
 import { ProductServices } from "./products.service";
-import { ProductBoxComponent } from "./productBox/product-box.component";
 import { CartService } from "../cart/cart.service";
 import { Product } from "../product/product";
-import { HttpClientModule } from "@angular/common/http";
 
 @Component({
  templateUrl: './product-list.component.html',

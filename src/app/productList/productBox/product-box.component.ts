@@ -1,4 +1,4 @@
-import { Component, Host, Input } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { CartService } from "src/app/cart/cart.service";
 import { Product } from "src/app/product/product";
 
