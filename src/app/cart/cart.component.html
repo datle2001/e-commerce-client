@@ -3,10 +3,12 @@
   ({{getTotalQuant()}} items)
  </h2>
 </h1>
-
+<button (click)="onRemoveAllClick()">Remove All</button>
 <div *ngFor="let product of cartService.selectedProducts">
  <app-cart-product
   [product]="product"
   (onRemove)="onRemoveClick($event)"
  />
 </div>
+
+<button (click)="onCheckOutClick()">Checkout</button>

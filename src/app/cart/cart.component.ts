@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Product } from '../product/product';
-import { ProductBoxComponent } from '../productList/productBox/product-box.component';
 import { CartService } from './cart.service';
 
 @Component({
@@ -16,5 +15,13 @@ export class CartComponent {
 
   onRemoveClick(product: Product) {
     this.cartService.removeProduct(product)
+  }
+
+  onCheckOutClick() {
+    this.cartService.createCheckout()
+  }
+
+  onRemoveAllClick() {
+    this.cartService.removeAll();
   }
 }

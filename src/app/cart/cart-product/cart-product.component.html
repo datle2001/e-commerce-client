@@ -1,9 +1,9 @@
-<img src="./assets/gummy.png" style="width: 50px"/>
+<img src={{product.photoUrl}} style="width: 50px"/>
 {{product.name}}
 Item # {{product.code}}
 Quantity: {{product.quantityPick}}
 <mat-form-field appearance="fill">
- <mat-select [(ngModel)]="selectedQuantity">
+ <mat-select [(value)]="product.quantityPick" (selectionChange)="onQuantityChange()">
   <mat-option *ngFor="let quantity of quantityOptions" [value]="quantity">
    {{quantity}}
   </mat-option>

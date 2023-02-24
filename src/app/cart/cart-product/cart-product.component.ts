@@ -8,20 +8,18 @@ import { CartService } from '../cart.service';
   templateUrl: './cart-product.component.html',
   styleUrls: ['./cart-product.component.css']
 })
-export class CartProductComponent implements OnChanges{
+export class CartProductComponent{
   @Input()
-  product!: Product;
-  @Output() onRemove = new EventEmitter<Product>();
-  selectedQuantity!: number
-  quantityOptions: number[] = [...Array(10).keys()]
+  product!: Product
+  @Output() onRemove = new EventEmitter<Product>()
+  quantityOptions: number[] = Array.from({length: 10}, (_, i) => i + 1)
 
+  constructor(private cartService: CartService) {}
   onRemoveClick(): void {
     this.onRemove.emit(this.product)    
   }
 
-  ngOnChanges(): void{
-    if(this.product !== null) {
-      this.selectedQuantity = this.product.quantityPick
-    }
+  onQuantityChange() {
+    this.cartService.saveCartToLocal();
   }
 }

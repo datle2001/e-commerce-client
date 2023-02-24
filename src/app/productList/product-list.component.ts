@@ -25,7 +25,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
  ngOnInit(): void {
   this.products = this.productsService.getProducts()
-  this.filteredProducts = this.products;
+  this.filteredProducts = this.products;  
  }
 
  get nameFilter(): string {
@@ -35,7 +35,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
  set nameFilter(filter: string) {
   this._nameFilter = filter
   this.filteredProducts = this.products.filter((product: Product) => 
-   product.name.includes(filter)
+   product.name.toLowerCase().includes(filter.toLowerCase())
   )
  }
 }
