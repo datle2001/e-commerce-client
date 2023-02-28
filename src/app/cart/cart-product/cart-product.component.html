@@ -1,15 +1,15 @@
-<img src={{product.photoUrl}} style="width: 50px"/>
-{{product.name}}
-Item # {{product.code}}
-Quantity: {{product.quantityPick}}
-<mat-form-field appearance="fill">
- <mat-select [(value)]="product.quantityPick" (selectionChange)="onQuantityChange()">
-  <mat-option *ngFor="let quantity of quantityOptions" [value]="quantity">
-   {{quantity}}
-  </mat-option>
-</mat-select>
-</mat-form-field>
+<div id="cart-product-container">
+  <img src="{{ product.photoUrl }}"/>
+  <div id="detail-container">
+    <p style="font-weight: 600; font-size: larger;">{{ product.name }}</p>
+    <p>Item #{{ product.code }}</p>
+    <p>${{product.price}}</p>
+    <div style="display: flex; position: relative; align-items: center">
+      <div style="display: flex; position: relative; align-items: center; width: 90%;">
+        <quant-select [quant]="product.quantityPick" (onClick)="setQuantitySelect($event)"/>
+        <i (click)="onRemoveClick()" class="bi bi-trash2"></i>
+      </div>
+      <p style="position: relative; margin-top: auto;margin-bottom: auto; display:inline-block; width: 10%; text-align: end;">${{product.quantityPick*product.price}}</p>
+  </div>
+</div>
 
-
-<button (click)="onRemoveClick()">Remove</button>
-Cost: {{product.quantityPick * product.price}}

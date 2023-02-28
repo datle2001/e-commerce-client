@@ -1,0 +1,18 @@
+button {
+  width: 100%;
+}
+#os-container {
+  background-color: rgb(240, 240, 240, 0.5);
+  border-radius: 10%;
+  display: inline-block;
+  margin-left: 20px;
+  padding: 20px;
+  width: 30%;
+}
+h4 {
+  padding: auto;
+}
+a {
+  text-decoration: underline;
+  color: blue;
+}

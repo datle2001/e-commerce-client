@@ -1,19 +1,26 @@
-.p-box {
- border: 0.5px solid;
-}
-
-.img-center {
+img {
   display: block;
-  margin-left: auto;
-  margin-right: auto
-}
-
-a {
- all:unset
+  width: 100%;
+  height: 15em;
 }
 
 a:hover {
- text-decoration: underline;
- color: lightgray;
- cursor: pointer
+  text-decoration: underline;
+  color: lightgray;
+  cursor: pointer;
+}
+
+.but-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+}
+#quant-container {
+  position: relative;
+  font-size: larger;
+  margin-bottom: 20px;
+}
+
+quant-select {
+  margin-left: 50px;
 }

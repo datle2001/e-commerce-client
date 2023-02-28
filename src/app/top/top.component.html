@@ -1,17 +1,29 @@
 <div id="top">
- <a href="http://localhost:4200/">
-  <img src={{shopLogoUrl}} id="shopLogo" />
- </a>
- <button routerLink="/products">Product</button>
- <div id="right">
-  <a routerLink="cart">
-   <img src={{cartLogoUrl}} id="cartLogo" />
-  </a>
- 
   <a href="http://localhost:4200/">
-   <img src={{accountLogoUrl}} id="accountLogo" />
+    <img src="{{ shopLogoUrl }}" id="shopLogo" />
   </a>
- </div>
- 
+  <a routerLink="/products" style="font-size: x-large; margin-left: 100px">
+    Products
+  </a>
 
+  <a routerLink="/support" style="font-size: x-large; margin-left: 100px">
+    Support
+  </a>
+  <a routerLink="/blog" style="font-size: x-large; margin-left: 100px">
+    Blog
+  </a>
+  <div id="right">
+    <a routerLink="cart">
+      <i
+        class="bi bi-cart4"
+        id="cartLogo"
+        matBadge="{{ cartService.getTotalQuant() }}"
+        matBadgeHidden="{{ cartService.getTotalQuant() == 0 }}"
+      ></i>
+    </a>
+
+    <a href="http://localhost:4200/">
+      <img src="{{ accountLogoUrl }}" id="accountLogo" />
+    </a>
+  </div>
 </div>

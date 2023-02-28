@@ -1,24 +1,31 @@
-import { Component, EventEmitter, Input, Output, OnChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  OnChanges,
+} from '@angular/core';
 import { Product } from 'src/app/product/product';
 import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-cart-product',
   templateUrl: './cart-product.component.html',
-  styleUrls: ['./cart-product.component.css']
+  styleUrls: ['./cart-product.component.css'],
 })
-export class CartProductComponent{
+export class CartProductComponent {
   @Input()
-  product!: Product
-  @Output() onRemove = new EventEmitter<Product>()
-  quantityOptions: number[] = Array.from({length: 10}, (_, i) => i + 1)
+  product!: Product;
+  @Output() onRemove = new EventEmitter<Product>();
+  quantityOptions: number[] = Array.from({ length: 10 }, (_, i) => i + 1);
 
   constructor(private cartService: CartService) {}
   onRemoveClick(): void {
-    this.onRemove.emit(this.product)    
+    this.onRemove.emit(this.product);
   }
 
-  onQuantityChange() {
+  setQuantitySelect($event: number) {
+    this.product.quantityPick = $event;
     this.cartService.saveCartToLocal();
   }
 }

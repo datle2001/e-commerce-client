@@ -1,0 +1,7 @@
+a:active {
+  all: unset;
+}
+a {
+  color: black;
+  text-decoration: none;
+}

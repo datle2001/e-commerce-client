@@ -1,18 +1,37 @@
-#shopLogo, #cartLogo, #accountLogo {
- width: 75px;
- display: inline-block;
- text-align: center;
-}
-
-#right {
- width: 100%;
- display: flex;
- justify-content: flex-end;
-}
 #top {
- height: 100px;
- box-shadow: 0px 1px 5px gray;
- display: flex;
- align-items: center;
- position:sticky;
+  box-shadow: 0px 1px 5px gray;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  overflow: hidden;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 90px;
+}
+#shopLogo {
+  width: 80px;
+  scale: 3;
+}
+h2 {
+  margin: auto;
+  margin-left: 100px;
+}
+#cartLogo,
+#accountLogo {
+  width: 50px;
+  display: inline-block;
+  text-align: center;
+}
+#cartLogo {
+  font-size: xx-large;
+  font-weight: 100;
+  color: black;
+  width: fit-content;
+  margin-right: 50px;
+}
+#right {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }

@@ -1,14 +1,35 @@
-<h1>Your Cart 
- <h2 style="display: inline; font-weight: lighter">
-  ({{getTotalQuant()}} items)
- </h2>
-</h1>
-<button (click)="onRemoveAllClick()">Remove All</button>
-<div *ngFor="let product of cartService.selectedProducts">
- <app-cart-product
-  [product]="product"
-  (onRemove)="onRemoveClick($event)"
- />
-</div>
+<div class="route-container">
+  <div style="display: flex; align-items:flex-start;" *ngIf="cartService.getTotalQuant() > 0">
+    <div style="display: inline-block; width: 70%;">
+      <h1>Your Cart 
+        <h2 style="display: inline; font-weight: lighter">
+          ({{cartService.getTotalQuant()}} items)
+        </h2>
+      </h1>
+      <mat-divider/>
+      <div *ngFor="let product of cartService.selectedProducts">
+        <app-cart-product
+          [product]="product"
+          (onRemove)="onRemoveClick($event)"
+        />
+      </div>
+    </div>
+    <div id="os-container">
+      <h2>Order Summary</h2>
+      <h4>Subtotal 
+        <div style="display: inline; float: right">${{cartService.getSubtotal()}}</div>
+      </h4>
+      <h4>Estimated Shipping 
+        <div style="display: inline; float: right">$9.95</div>
+      </h4>
+      <h4>Estimated Total 
+        <div style="display: inline; float: right">${{cartService.getSubtotal() + 9.95}}</div>
+      </h4>
+      <button mat-raised-button color="primary" (click)="onCheckOutClick()">Checkout</button>
+    </div>
+  </div>
 
-<button (click)="onCheckOutClick()">Checkout</button>
+  <h1 *ngIf="cartService.getTotalQuant() == 0">
+    Your cart is empty. Click <a routerLink="/products">here</a> to go back to Products page.
+  </h1>
+</div>

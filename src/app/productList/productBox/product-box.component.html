@@ -1,15 +1,24 @@
-<div class="p-box">
- <a [routerLink]="['/products', product.code]">
-  <img src={{product.photoUrl}} class="img-center" style="max-width: 70%;">
- </a>
- <a [routerLink]="['/products', product.code]">
-  <h3>{{product.name}}</h3>
- </a>
- <h4>{{product.rating}}</h4>
- <h4>Item # {{product.code}}</h4>
- <h5>Price {{product.price}}</h5>
- <div>
-  <h4>Quantity</h4>
- </div>
- <button (click)="onAddClick()">Add to cart</button>
+<a [routerLink]="['/products', product.code]">
+ <img src={{product.photoUrl}}/>
+</a>
+<a [routerLink]="['/products', product.code]">
+ <h3 style="font-weight: 600;">{{product.name}}</h3>
+</a>
+
+<mat-divider/>
+
+<star [rating]="product.rating"/>
+<h4 style="font-weight: 200;">Item #{{product.code}}</h4>
+<h4>${{product.price}}</h4>
+
+<div id="quant-container">
+ <p style="display: inline-block;">Quantity</p>
+ <quant-select [quant]="quantitySelect" (onClick)="setQuantitySelect($event)"/>
 </div>
+
+<mat-divider/>
+
+<div class="but-container">
+ <button mat-flat-button color="primary" (click)="onAddClick()">Add to cart</button>
+</div>
+
