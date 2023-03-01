@@ -7,9 +7,5 @@ import { CartService } from '../cart/cart.service';
   styleUrls: ['./top.component.css'],
 })
 export class TopComponent {
-  shopLogoUrl = '../assets/shopLogo.jpg';
-  accountLogoUrl = '../assets/accountLogo.png';
-  cartLogoUrl = '../assets/cartLogo.png';
-
   constructor(protected cartService: CartService) {}
 }
