@@ -1,0 +1,30 @@
+img {
+  display: block;
+  height: 150px;
+}
+.tile-container {
+  text-align: center;
+}
+h1 {
+  margin-top: 30px;
+  font-size: 40px;
+  text-align: center;
+  font-weight: 600;
+  color: rgba(0, 233, 0);
+  margin-bottom: 50px;
+  text-decoration: underline;
+}
+.route-container {
+  background-color: rgba(120, 253, 12, 0.4);
+  padding: 50px;
+  border-radius: 5%;
+}
+
+h2 {
+  margin-top: 30px;
+}
+
+mat-divider {
+  margin-top: 70px;
+  border: 0.5px rgb(128, 128, 128, 0.5) solid;
+}
