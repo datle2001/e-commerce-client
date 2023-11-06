@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { CartService } from 'src/app/cart/cart.service';
-import { Product } from 'src/app/product/product';
+import { Product } from 'src/app/model/product/product';
+import { CartServices } from 'src/app/services/cart.service';
+import { ToastServices } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'pb-root',
@@ -9,18 +9,32 @@ import { Product } from 'src/app/product/product';
   styleUrls: ['./product-box.component.css'],
 })
 export class ProductBoxComponent {
+  constructor(
+    private cartService: CartServices,
+    private toastService: ToastServices
+  ) {}
+
   @Input()
   product!: Product;
-  quantitySelect: number = 1;
 
-  constructor(private cartService: CartService) {}
-
+  /**
+   * Triggers on Add button clicked
+   */
   onAddClick(): void {
-    this.cartService.addProduct(this.product, this.quantitySelect);
-    this.quantitySelect = 1;
+    this.cartService.addProduct(this.product);
+
+    this.toastService.showSuccessToast(
+      `${this.product.quantityPick} ${this.product.name}(s) added to your cart`
+    );
+
+    this.resetQuantitySelect();
   }
 
-  setQuantitySelect($event: number) {
-    this.quantitySelect = $event;
+  setQuantitySelect(quantitySelect: number) {
+    this.product.quantityPick = quantitySelect;
+  }
+
+  resetQuantitySelect() {
+    this.product.quantityPick = 1;
   }
 }

@@ -1,45 +1,61 @@
-import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
-import { Subscription } from "rxjs";
-import { ProductServices } from "./products.service";
-import { CartService } from "../cart/cart.service";
-import { Product } from "../product/product";
+import { Component, HostListener, OnInit } from '@angular/core';
+import { Product } from '../model/product/product';
+import { ProductServices } from '../services/product.service';
 
 @Component({
- templateUrl: './product-list.component.html',
- styleUrls: ['./product-list.component.css'],
+  templateUrl: './product-list.component.html',
+  styleUrls: ['./product-list.component.css'],
 })
-export class ProductListComponent implements OnInit{
-  private _nameFilter: string = ""
-  private MAX_COLS_PER_ROW = 4
+export class ProductListComponent implements OnInit {
+  constructor(private productServices: ProductServices) {}
+
+  private _nameFilter: string = '';
+  private MAX_COLS_PER_ROW = 4;
   private MAX_SCREEN_WIDTH = window.screen.availWidth;
-  protected cols: number = this.MAX_COLS_PER_ROW
-
-  products: Product[] = []
-  filteredProducts: Product[] = []
-  errorMessage: any;
-  sub! : Subscription;
-
-  constructor(private productsService: ProductServices, private cartService: CartService) {}
+  protected cols: number = this.MAX_COLS_PER_ROW;
+  protected products: Product[] = [];
+  protected filteredProducts: Product[] = [];
 
   ngOnInit(): void {
-    this.products = this.productsService.getProducts()
-    this.filteredProducts = this.products;  
+    this.getProducts();
+  }
+
+  /**
+   * Call to ProductServices to get all products
+   */
+  protected getProducts(): void {
+    this.productServices.getProducts().subscribe({
+      next: (rawProducts) => {
+        rawProducts.forEach((rawProduct: any) => {
+          let product = this.productServices.initProductFrom(rawProduct);
+
+          // add the instance to the Product array
+          this.products.push(product);
+        });
+
+        this.filteredProducts = this.products;
+      },
+      error: (err) => {
+        console.log(err, err.data);
+      },
+    });
   }
 
   get nameFilter(): string {
-    return this._nameFilter
+    return this._nameFilter;
   }
 
   set nameFilter(filter: string) {
-    this._nameFilter = filter
-    this.filteredProducts = this.products.filter((product: Product) => 
-    product.name.toLowerCase().includes(filter.toLowerCase())
-    )
+    this._nameFilter = filter;
+    this.filteredProducts = this.products.filter((product: Product) =>
+      product.name.toLowerCase().includes(filter.toLowerCase())
+    );
   }
 
   @HostListener('window:resize', ['$event'])
-    onResize() {
-      this.cols = Math.round(innerWidth/this.MAX_SCREEN_WIDTH * this.MAX_COLS_PER_ROW)     
-    
-    }
+  onResize() {
+    this.cols = Math.round(
+      (innerWidth / this.MAX_SCREEN_WIDTH) * this.MAX_COLS_PER_ROW
+    );
+  }
 }

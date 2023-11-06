@@ -1,0 +1,26 @@
+<div id="confirmation-product-container">
+  <img src="{{ orderedProduct.product.photoUrl }}" />
+  <div id="detail-container">
+    <div style="text-align: left">
+      <p style="font-weight: 600; font-size: larger">
+        {{ orderedProduct.product.name }}
+      </p>
+      <p>Item #{{ orderedProduct.product.id }}</p>
+      <p>Price: ${{ orderedProduct.product.price }}</p>
+      <p>Quantity: {{ orderedProduct.orderedQuantity }}</p>
+    </div>
+
+    <p
+      style="
+        position: relative;
+        margin-top: auto;
+        margin-bottom: auto;
+        display: inline-block;
+      "
+    >
+      Total: ${{
+        orderedProduct.orderedQuantity * orderedProduct.product.price
+      }}
+    </p>
+  </div>
+</div>

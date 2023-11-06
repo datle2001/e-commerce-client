@@ -1,12 +1,16 @@
 <div class="route-container">
-  <div style="display: flex; align-items:flex-start;" *ngIf="cartService.getTotalQuant() > 0">
-    <div style="display: inline-block; width: 70%;">
-      <h1>Your Cart 
+  <div
+    style="display: flex; align-items: flex-start"
+    *ngIf="cartService.countProducts() > 0"
+  >
+    <div style="display: inline-block; width: 70%">
+      <h1>
+        Your Cart
         <h2 style="display: inline; font-weight: lighter">
-          ({{cartService.getTotalQuant()}} items)
+          ({{ cartService.countProducts() }} items)
         </h2>
       </h1>
-      <mat-divider/>
+      <mat-divider />
       <div *ngFor="let product of cartService.selectedProducts">
         <app-cart-product
           [product]="product"
@@ -16,20 +20,26 @@
     </div>
     <div id="os-container">
       <h2>Order Summary</h2>
-      <h4>Subtotal 
-        <div style="display: inline; float: right">${{cartService.getSubtotal()}}</div>
+      <h4>
+        Subtotal
+        <div class="prices">${{ cartService.getSubtotal() }}</div>
       </h4>
-      <h4>Estimated Shipping 
-        <div style="display: inline; float: right">$9.95</div>
+      <h4>
+        Estimated Shipping
+        <div class="prices">$9.95</div>
       </h4>
-      <h4>Estimated Total 
-        <div style="display: inline; float: right">${{cartService.getSubtotal() + 9.95}}</div>
+      <h4>
+        Estimated Total
+        <div class="prices">${{ cartService.getSubtotal() + 9.95 }}</div>
       </h4>
-      <button mat-raised-button color="primary" (click)="onCheckOutClick()">Checkout</button>
+      <button mat-raised-button color="primary" (click)="onCheckOutClick()">
+        Checkout
+      </button>
     </div>
   </div>
 
-  <h1 *ngIf="cartService.getTotalQuant() == 0">
-    Your cart is empty. Click <a routerLink="/products">here</a> to go back to Products page.
+  <h1 *ngIf="cartService.countProducts() == 0">
+    Your cart is empty. Click <a routerLink="/products">here</a> to go back to
+    Products page.
   </h1>
 </div>

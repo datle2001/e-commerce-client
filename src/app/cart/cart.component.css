@@ -16,3 +16,7 @@ a {
   text-decoration: underline;
   color: blue;
 }
+.prices {
+  display: inline;
+  float: right;
+}

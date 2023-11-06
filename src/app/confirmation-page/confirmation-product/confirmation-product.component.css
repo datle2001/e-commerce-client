@@ -1,0 +1,25 @@
+#confirmation-product-container {
+  position: relative;
+  display: flex;
+  height: 200px;
+  border-bottom: 0.5px rgb(196, 196, 196) solid;
+}
+img {
+  position: relative;
+  height: 150px;
+}
+#detail-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin-left: 10px;
+  text-align: right;
+}
+i {
+  display: inline-block;
+  font-size: 30px;
+  margin-left: 20px;
+}
+i:hover {
+  cursor: pointer;
+}

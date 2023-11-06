@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CartService } from '../cart/cart.service';
+import { CartServices } from '../services/cart.service';
 
 @Component({
   selector: 'top-root',
@@ -7,5 +7,5 @@ import { CartService } from '../cart/cart.service';
   styleUrls: ['./top.component.css'],
 })
 export class TopComponent {
-  constructor(protected cartService: CartService) {}
+  constructor(protected cartService: CartServices) {}
 }

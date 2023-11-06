@@ -1,0 +1,26 @@
+#ordered_products {
+  margin-top: 50px;
+}
+
+h1 {
+  font-size: 50px;
+  margin-bottom: 50px;
+}
+#order {
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#prices {
+  margin-top: 25px;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+li {
+  margin-bottom: 5px;
+}
+ul {
+  display: inline-block;
+  list-style-type: none;
+}

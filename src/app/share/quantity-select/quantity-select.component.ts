@@ -10,11 +10,11 @@ export class QuantitySelectComponent {
   quant!: number;
   @Output() onClick = new EventEmitter<number>()
 
-  onIncrementClick() {
+  protected onIncrementClick() {
     this.onClick.emit(this.quant+1)
   }
 
-  onDecrementClick() {
+  protected onDecrementClick() {
     if(this.quant > 1) {
       this.onClick.emit(this.quant-1)
     }

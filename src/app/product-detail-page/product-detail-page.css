@@ -1,0 +1,19 @@
+#product-detail-page-container {
+  display: flex;
+}
+h1 {
+  font-size: 54px;
+  font-weight: 600px;
+}
+img {
+  width: 500px;
+  margin-right: 100px;
+}
+#price {
+  font-size: 24px;
+  font-weight: 400px;
+}
+p {
+  font-size: 18px;
+  font-weight: 200px;
+}

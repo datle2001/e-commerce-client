@@ -17,8 +17,8 @@
       <i
         class="bi bi-cart4"
         id="cartLogo"
-        matBadge="{{ cartService.getTotalQuant() }}"
-        matBadgeHidden="{{ cartService.getTotalQuant() == 0 }}"
+        matBadge="{{ cartService.countProducts() }}"
+        matBadgeHidden="{{ cartService.countProducts() == 0 }}"
       ></i>
     </a>
 

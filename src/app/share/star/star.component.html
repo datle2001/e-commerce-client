@@ -1,1 +1,7 @@
-<ngb-rating [max]="5" [(rate)]="rating" [readonly]="true"/>
+<ngb-rating 
+  [max]="5" 
+  [(rate)]="rating"
+  [readonly]="isReadOnly"
+  [style]="{fontSize: '20px'}"
+  (rateChange)="onRatingClick($event)"
+/>

@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'star',
@@ -9,4 +8,13 @@ import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 export class StarComponent {
  @Input()
  rating!: number
+ @Input()
+ isReadOnly: boolean = true
+
+ @Output()
+ onRatingChange: EventEmitter<number> = new EventEmitter<number>();
+
+ protected onRatingClick(newRating: number) {
+  this.onRatingChange.emit(newRating);
+ }
 }

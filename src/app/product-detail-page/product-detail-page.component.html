@@ -1,0 +1,41 @@
+<div class="route-container">
+  <div *ngIf="!product">
+    <mat-spinner [style]="{ margin: 'auto' }" />
+  </div>
+
+  <div *ngIf="product" id="product-detail-page-container">
+    <img src="{{ product.photoUrl }}" />
+
+    <div id="product-detail-container">
+      <h1>{{ product.name }}</h1>
+      <br />
+      <p>Item #{{ product.id }}</p>
+      <p>Availability: Yes</p>
+      <br />
+
+      <star [rating]="product.rating" [isReadOnly]="false" (onRatingChange)="setRating($event)"/>
+      <p id="price">${{ product.price }}</p>
+      <br />
+
+      <mat-divider /><br />
+
+      <div [style]="{ display: 'flex', alignItems: 'baseline' }">
+        <quant-select
+          [quant]="product.quantityPick"
+          (onClick)="setQuantitySelect($event)"
+        />
+
+        <div [style]="{ marginLeft: '20px' }">
+          <button mat-flat-button color="primary" (click)="onAddClick()">
+            Add to cart
+          </button>
+        </div>
+      </div>
+      <br />
+
+      <mat-divider /><br />
+
+      <p>{{ product.description }}</p>
+    </div>
+  </div>
+</div>
