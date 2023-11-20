@@ -1,29 +1,34 @@
 <div class="route-container">
-  <h1>We have the best products for you and your family</h1>
+  <div *ngIf="!imageLinks">
+    <mat-spinner [style]="{ margin: 'auto' }" />
+  </div>
 
-  <img
-    src="./src/assets/farm.jpg"
-    style="height: 100%; display: block; margin: auto"
-  />
-  <mat-divider></mat-divider>
-  <mat-grid-list cols="3" gutterSize="10px">
-    <mat-grid-tile>
-      <div class="tile-container">
-        <img src="./src/assets/farm2.jpg" />
-        <h2>Organic Only</h2>
-      </div>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <div class="tile-container">
-        <img src="./src/assets/farm1.jpg" />
-        <h2>Fresh off the ground</h2>
-      </div>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <div class="tile-container">
-        <img src="./src/assets/farm5.jpg" />
-        <h2>Enviromentally friendly</h2>
-      </div>
-    </mat-grid-tile>
-  </mat-grid-list>
+  <div *ngIf="imageLinks">
+    <h1>We have the best products for you and your family</h1>
+
+    <img
+      src="{{imageLinks['farm']}}"
+      style="height: 100%; display: block; margin: auto"
+    />
+    <mat-divider></mat-divider>
+    <mat-grid-list cols="3" gutterSize="10px">
+      <mat-grid-tile>
+        <div class="tile-container">
+          <img src="{{ imageLinks['farm_2'] }}" />
+          <h2>Organic Only</h2>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="tile-container">
+          <img src="{{ imageLinks['farm_1'] }}" />
+          <h2>Fresh off the ground</h2>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="tile-container">
+          <img src="{{ imageLinks['farm_5'] }}" />
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
 </div>
