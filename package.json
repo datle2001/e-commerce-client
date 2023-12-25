@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "npm run config -- --environment=dev && ng serve",
-    "build": "npm run config -- --environment=prod && ng build",
+    "start": "ng serve",
+    "build": "npm run config && ng build",
+    "config": "ts-node src/environments/set-env.ts",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -38,7 +39,7 @@
     "@angular/compiler-cli": "^15.1.0",
     "@angular/localize": "^15.1.0",
     "@types/jasmine": "~4.3.0",
-    "@types/node": "^20.8.6",
+    "@types/node": "^20.10.5",
     "dotenv": "^16.3.1",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
