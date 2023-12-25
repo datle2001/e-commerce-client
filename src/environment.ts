@@ -13,6 +13,7 @@ export const environment = {
       region: 'us-west-1',
       secretAccessKey: '8s0nsRWBFjTegvwFrce9ZclOCbNJGuc2AzksrgEU',
     },
+
     photoBucket: 'ecommerce-product-photos',
   },
 };
