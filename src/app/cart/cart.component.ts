@@ -38,7 +38,7 @@ export class CartComponent {
     this.orderServices.createOrder().subscribe({
       next: (paymentLink: any) => {
         //TODO: hide the spinner here
-
+        
         this.toastService.showSuccessToast(
           'Thank you for placing an order with us!',
           globals.toastLongerTimeout
