@@ -75,10 +75,9 @@ import { ConfirmationProductComponent } from './confirmation-page/confirmation-p
       { path: 'welcome', component: WelcomeComponent, pathMatch: 'full' },
       { path: 'confirmation/:id', component: ConfirmationPageComponent },
       { path: '404', redirectTo: 'welcome'},
-      { path: '', redirectTo: '/welcome', pathMatch: 'full' },
-      { path: '**', redirectTo: '/404', pathMatch: 'full' },
-      
-    ]),
+      { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+      { path: '**', redirectTo: '404', pathMatch: 'full' },
+    ], {useHash: true}),
   ],
   providers: [S3Services],
   bootstrap: [AppComponent],
