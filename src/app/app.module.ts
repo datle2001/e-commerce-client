@@ -72,10 +72,10 @@ import { ConfirmationProductComponent } from './confirmation-page/confirmation-p
       { path: 'cart', component: CartComponent },
       { path: 'blog', component: BlogComponent },
       { path: 'support', component: SupportComponent },
-      { path: 'welcome', component: WelcomeComponent },
-      { path: 'confirmation/:id', component: ConfirmationPageComponent},
+      { path: 'welcome', component: WelcomeComponent, pathMatch: 'full' },
+      { path: 'confirmation/:id', component: ConfirmationPageComponent },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
-      { path: '**', redirectTo: 'welcome' }
+      { path: '**', redirectTo: 'welcome' },
     ]),
   ],
   providers: [S3Services],
