@@ -40,6 +40,7 @@ export class CartComponent {
     this.orderServices.createOrder().subscribe({
       next: (paymentLink: any) => {
         //TODO: hide the spinner here
+        console.log(paymentLink['after_completion']);
         
         this.toastService.showSuccessToast(
           'Thank you for placing an order with us!',
@@ -48,7 +49,7 @@ export class CartComponent {
 
         delayFor(globals.toastLongerTimeout);
 
-        redirectTo(paymentLink.url);
+        //redirectTo(paymentLink.url);
       },
       error: (error) => {
         console.log(error);
