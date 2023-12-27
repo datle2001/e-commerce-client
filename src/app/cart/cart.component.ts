@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { globals } from 'src/globals';
 import { Product } from '../model/product/product';
 import { CartServices } from '../services/cart.service';
 import { OrderServices } from '../services/order.service';
 import { ToastServices } from '../services/toast.service';
-import { delay } from '../share/helpers';
+import { delay as delayFor, redirectTo } from '../share/helpers';
 
 @Component({
   templateUrl: './cart.component.html',
@@ -14,7 +15,8 @@ export class CartComponent {
   constructor(
     protected cartService: CartServices,
     private toastService: ToastServices,
-    private orderServices: OrderServices
+    private orderServices: OrderServices,
+    private router: Router
   ) {}
 
   /**
@@ -44,9 +46,9 @@ export class CartComponent {
           globals.toastLongerTimeout
         );
 
-        delay(globals.toastLongerTimeout);
+        delayFor(globals.toastLongerTimeout);
 
-        window.location.href = paymentLink.url;
+        redirectTo(paymentLink.url);
       },
       error: (error) => {
         console.log(error);

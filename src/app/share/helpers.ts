@@ -15,3 +15,7 @@ export function decycle(obj: any, stack: any[] = []): any {
 export async function delay(timeOut: number) {
   return new Promise((resolve) => setTimeout(resolve, timeOut));
 }
+
+export function redirectTo(link: string) {
+  window.location.href = link;
+}
