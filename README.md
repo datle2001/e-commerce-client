@@ -1,3 +1,3 @@
-# My E-Commerce store
+# My E-Commerce Store
 
-Link to this repo website: **https://datle2001.github.io/e-commerce-client/**
+To be updated soon!
