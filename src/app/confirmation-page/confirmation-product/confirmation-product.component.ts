@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { OrderedProduct } from 'src/app/model/product/order';
+import { OrderedProduct } from 'src/app/model/order';
 
 @Component({
   selector: 'confirmation-product',

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { globals } from 'src/globals';
-import { Product } from '../model/product/product';
+import { Product } from '../model/product';
 import { CartServices } from '../services/cart.service';
 import { OrderServices } from '../services/order.service';
 import { ToastServices } from '../services/toast.service';
-import { delay as delayFor, redirectTo } from '../share/helpers';
+import { delay as delayFor } from '../share/helpers';
 
 @Component({
   templateUrl: './cart.component.html',
@@ -41,7 +41,7 @@ export class CartComponent {
       next: (paymentLink: any) => {
         //TODO: hide the spinner here
         console.log(paymentLink['after_completion']);
-        
+
         this.toastService.showSuccessToast(
           'Thank you for placing an order with us!',
           globals.toastLongerTimeout

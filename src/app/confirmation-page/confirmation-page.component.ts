@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Order } from '../model/order';
 import { CartServices } from '../services/cart.service';
 import { OrderServices } from '../services/order.service';
-import { Order } from '../model/product/order';
 
 @Component({
   templateUrl: './confirmation-page.component.html',
@@ -15,7 +15,7 @@ export class ConfirmationPageComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  protected confirmedOrder: Order|undefined;
+  protected confirmedOrder: Order | undefined;
   protected orderId = this.route.snapshot.paramMap.get('id')!;
 
   ngOnInit(): void {

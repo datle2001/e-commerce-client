@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from '../model/product/product';
+import { Product } from '../model/product';
 import { CartServices } from '../services/cart.service';
 import { ProductServices } from '../services/product.service';
 import { ToastServices } from '../services/toast.service';
@@ -68,7 +68,7 @@ export class ProductDetailPageComponent implements OnInit {
     this.productServices
       .updateProduct(this.id, { rating: newRating })
       .subscribe({
-        next: (updatedRawProduct: any) => {          
+        next: (updatedRawProduct: any) => {
           this.toastServices.showSuccessToast(
             `Successfully rated ${updatedRawProduct.name}`
           );

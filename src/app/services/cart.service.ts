@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Product } from '../model/product/product';
+import { Product } from '../model/product';
 import { decycle } from '../share/helpers';
 
 @Injectable({
