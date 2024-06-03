@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartServices } from '../services/cart.service';
-import { S3Services } from '../services/s3.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'top-root',
@@ -8,22 +8,9 @@ import { S3Services } from '../services/s3.service';
   styleUrls: ['./top.component.css'],
 })
 export class TopComponent implements OnInit {
-  constructor(protected cartService: CartServices, private s3: S3Services) {}
+  constructor(protected cartService: CartServices) {}
 
-  imageLinks: { [imageName: string]: string } = {
-    shop_logo: '',
-    account_logo: '',
-  };
+  protected headerImageLink = `${environment.googleStorageURL}/image-header/`;
 
-  ngOnInit(): void {
-    this.getImageLinks();
-  }
-
-  getImageLinks() {
-    Object.keys(this.imageLinks).forEach((imageName) => {
-      this.imageLinks[imageName] = this.s3.getProductPhotoUrl(
-        `misc/${imageName}.jpg`
-      );
-    });
-  }
+  ngOnInit(): void {}
 }

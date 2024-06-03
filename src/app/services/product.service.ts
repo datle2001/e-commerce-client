@@ -3,13 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Product } from '../model/product/product';
-import { S3Services } from './s3.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductServices {
-  constructor(private http: HttpClient, private s3: S3Services) {}
+  constructor(private http: HttpClient) {}
 
   private productUrl = `${environment.api.url}/products`;
 
@@ -37,19 +36,16 @@ export class ProductServices {
   /**
    * Initialize a Product from *rawProduct*
    * @param rawProduct
-   * @returns 
+   * @returns
    */
   initProductFrom(rawProduct: any): Product {
-    // Get an URL to this product image on S3
-    let photoUrl = this.s3.getProductPhotoUrl(rawProduct.photo_key);
-
     // create a Product instance
     let product = new Product(
       rawProduct.id,
       rawProduct.name,
       rawProduct.price,
       rawProduct.description,
-      photoUrl,
+      `${environment.googleStorageURL}/products/${rawProduct.photo_key}`,
       rawProduct.rating,
       rawProduct.num_rating
     );

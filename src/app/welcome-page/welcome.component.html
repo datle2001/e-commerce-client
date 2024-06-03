@@ -1,32 +1,28 @@
 <div class="route-container">
-  <div *ngIf="!imageLinks">
-    <mat-spinner [style]="{ margin: 'auto' }" />
-  </div>
-
-  <div *ngIf="imageLinks">
+  <div>
     <h1>We have the best products for you and your family</h1>
 
     <img
-      src="{{imageLinks['farm']}}"
+      src="{{ welcomePageImageLink }}farm.jpg"
       style="height: 100%; display: block; margin: auto"
     />
     <mat-divider></mat-divider>
     <mat-grid-list cols="3" gutterSize="10px">
       <mat-grid-tile>
         <div class="tile-container">
-          <img src="{{ imageLinks['farm_2'] }}" />
+          <img src="{{ welcomePageImageLink }}farm_2.jpg" />
           <h2>Organic Only</h2>
         </div>
       </mat-grid-tile>
       <mat-grid-tile>
         <div class="tile-container">
-          <img src="{{ imageLinks['farm_1'] }}" />
+          <img src="{{ welcomePageImageLink }}farm_1.jpg" />
           <h2>Fresh off the ground</h2>
         </div>
       </mat-grid-tile>
       <mat-grid-tile>
         <div class="tile-container">
-          <img src="{{ imageLinks['farm_5'] }}" />
+          <img src="{{ welcomePageImageLink }}farm_5.jpg" />
         </div>
       </mat-grid-tile>
     </mat-grid-list>
