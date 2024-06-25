@@ -3,10 +3,10 @@ import { Product } from '../model/product';
 import { ProductServices } from '../services/product.service';
 
 @Component({
-  templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css'],
+  templateUrl: './products-page.component.html',
+  styleUrls: ['./products-page.component.css'],
 })
-export class ProductListComponent implements OnInit {
+export class ProductsPageComponent implements OnInit {
   constructor(private productServices: ProductServices) {}
 
   private _nameFilter: string = '';
@@ -23,7 +23,7 @@ export class ProductListComponent implements OnInit {
   /**
    * Call to ProductServices to get all products
    */
-  protected getProducts(): void {
+  private getProducts(): void {
     this.productServices.getProducts().subscribe({
       next: (rawProducts) => {
         rawProducts.forEach((rawProduct: any) => {
@@ -35,8 +35,8 @@ export class ProductListComponent implements OnInit {
 
         this.filteredProducts = this.products;
       },
-      error: (err) => {
-        console.log(err, err.data);
+      error: (error) => {
+        console.log(error);
       },
     });
   }

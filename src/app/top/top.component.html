@@ -1,5 +1,5 @@
 <div id="top">
-  <a routerLink="/welcome">
+  <a routerLink="/">
     <img
       src="{{ headerImageLink }}shop_logo.jpg"
       id="shopLogo"
@@ -9,29 +9,23 @@
   <a routerLink="/products" style="font-size: x-large; margin-left: 100px">
     Products
   </a>
-
   <a routerLink="/support" style="font-size: x-large; margin-left: 100px">
     Support
-  </a>
-  <a routerLink="/blog" style="font-size: x-large; margin-left: 100px">
-    Blog
   </a>
   <div id="right">
     <a routerLink="cart">
       <i
         class="bi bi-cart4"
         id="cartLogo"
-        matBadge="{{ cartService.countProducts() }}"
-        matBadgeHidden="{{ cartService.countProducts() == 0 }}"
+        matBadge="{{ cartServices.countProducts() }}"
+        matBadgeHidden="{{ cartServices.countProducts() == 0 }}"
       ></i>
     </a>
 
-    <a routerLink="/welcome">
-      <img
-        src="{{ headerImageLink }}account_logo.jpg"
-        id="accountLogo"
-        alt="Account"
-      />
-    </a>
+    <img
+      src="{{ headerImageLink }}{{loginServices.hasLoggedIn() ? 'account_logo' : 'login-icon'}}.jpg"
+      id="accountLogo"
+      alt="Account"
+      (click)="onAccountLogoClick()"/>
   </div>
 </div>

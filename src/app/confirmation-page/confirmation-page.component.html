@@ -1,31 +1,31 @@
-<div *ngIf="!confirmedOrder">
-  <mat-spinner [style]="{ margin: 'auto' }" />
-</div>
+<div class="route-container">
+  <spinner [isDisplayed]="!confirmedOrder" />
 
-<div *ngIf="confirmedOrder">
-  <div [style]="{ textAlign: 'center', marginTop: '50px' }">
-    <h1>Thank you for shopping with us!</h1>
-    <h2>Here is a summary of your order</h2>
-    <div id="order">
-      <div
-        *ngFor="let orderedProduct of confirmedOrder.orderedProducts"
-        id="ordered_products"
-      >
-        <confirmation-product [orderedProduct]="orderedProduct" />
-      </div>
-      <div id="prices">
-        <ul style="text-align: left; padding-left: 0">
-          <li>Subtotal:</li>
-          <li>Shipping:</li>
-          <li>Tax ({{ confirmedOrder.tax }}%)</li>
-          <li>Total charge:</li>
-        </ul>
-        <ul style="text-align: right">
-          <li>${{ confirmedOrder.subtotal }}</li>
-          <li>{{ confirmedOrder.shippingFee }}</li>
-          <li>${{ confirmedOrder.taxFee }}</li>
-          <li>${{ confirmedOrder.totalCharge }}</li>
-        </ul>
+  <div *ngIf="confirmedOrder">
+    <div [style]="{ textAlign: 'center', marginTop: '50px' }">
+      <h1>Thank you for shopping with us!</h1>
+      <h2>Here is a summary of your order</h2>
+      <div id="order">
+        <div
+          *ngFor="let orderedProduct of confirmedOrder.orderedProducts"
+          id="ordered_products"
+        >
+          <confirmation-product [orderedProduct]="orderedProduct" />
+        </div>
+        <div id="prices">
+          <ul style="text-align: left; padding-left: 0">
+            <li>Subtotal:</li>
+            <li>Shipping:</li>
+            <li>Tax ({{ confirmedOrder.tax }}%)</li>
+            <li>Total charge:</li>
+          </ul>
+          <ul style="text-align: right">
+            <li>${{ confirmedOrder.subtotal }}</li>
+            <li>{{ confirmedOrder.shippingFee }}</li>
+            <li>${{ confirmedOrder.taxFee }}</li>
+            <li>${{ confirmedOrder.totalCharge }}</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

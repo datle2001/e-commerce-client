@@ -5,3 +5,7 @@ a {
   color: black;
   text-decoration: none;
 }
+.spinner {
+  margin: auto;
+  margin-top: 20vh;
+}

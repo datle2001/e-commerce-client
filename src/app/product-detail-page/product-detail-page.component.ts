@@ -4,6 +4,7 @@ import { Product } from '../model/product';
 import { CartServices } from '../services/cart.service';
 import { ProductServices } from '../services/product.service';
 import { ToastServices } from '../services/toast.service';
+import { ToastType } from '../share/enums';
 
 @Component({
   templateUrl: './product-detail-page.component.html',
@@ -52,10 +53,11 @@ export class ProductDetailPageComponent implements OnInit {
   protected onAddClick(): void {
     this.cartServices.addProduct(this.product!);
 
-    this.toastServices.showSuccessToast(
+    this.toastServices.showToast(
       `${this.product!.quantityPick} ${
         this.product!.name
-      }(s) added to your cart`
+      }(s) added to your cart`,
+      ToastType.SUCCESS
     );
 
     this.resetQuantitySelect();
@@ -69,8 +71,9 @@ export class ProductDetailPageComponent implements OnInit {
       .updateProduct(this.id, { rating: newRating })
       .subscribe({
         next: (updatedRawProduct: any) => {
-          this.toastServices.showSuccessToast(
-            `Successfully rated ${updatedRawProduct.name}`
+          this.toastServices.showToast(
+            `Successfully rated ${updatedRawProduct.name}`,
+            ToastType.SUCCESS
           );
         },
         error: (error) => {

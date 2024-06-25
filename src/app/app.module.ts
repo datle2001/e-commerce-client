@@ -15,37 +15,39 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
-import { BlogComponent } from './blog/blog.component';
 import { CartProductComponent } from './cart/cart-product/cart-product.component';
 import { CartComponent } from './cart/cart.component';
+import { ConfirmationPageComponent } from './confirmation-page/confirmation-page.component';
+import { ConfirmationProductComponent } from './confirmation-page/confirmation-product/confirmation-product.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 import { ProductDetailPageComponent } from './product-detail-page/product-detail-page.component';
-import { ProductListComponent } from './productList/product-list.component';
-import { ProductBoxComponent } from './productList/productBox/product-box.component';
+import { ProductBoxComponent } from './products-page/product-box/product-box.component';
+import { ProductsPageComponent } from './products-page/products-page.component';
 import { S3Services } from './services/s3.service';
 import { QuantitySelectComponent } from './share/quantity-select/quantity-select.component';
+import { SpinnerComponent } from './share/spinner/spinner.component';
 import { StarComponent } from './share/star/star.component';
 import { SupportComponent } from './support/support.component';
 import { TopComponent } from './top/top.component';
-import { WelcomeComponent } from './welcome-page/welcome.component';
-import { ConfirmationPageComponent } from './confirmation-page/confirmation-page.component';
-import { ConfirmationProductComponent } from './confirmation-page/confirmation-product/confirmation-product.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopComponent,
     ProductBoxComponent,
-    ProductListComponent,
-    WelcomeComponent,
+    ProductsPageComponent,
+    HomePageComponent,
     ProductDetailPageComponent,
     CartComponent,
     CartProductComponent,
     StarComponent,
     QuantitySelectComponent,
-    BlogComponent,
     SupportComponent,
     ConfirmationPageComponent,
     ConfirmationProductComponent,
+    LoginPageComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,14 +69,14 @@ import { ConfirmationProductComponent } from './confirmation-page/confirmation-p
     }),
     HttpClientModule,
     RouterModule.forRoot([
-      { path: 'products', component: ProductListComponent },
+      { path: 'products', component: ProductsPageComponent },
       { path: 'products/:id', component: ProductDetailPageComponent },
       { path: 'cart', component: CartComponent },
-      { path: 'blog', component: BlogComponent },
       { path: 'support', component: SupportComponent },
-      { path: 'welcome', component: WelcomeComponent },
+      { path: 'home', component: HomePageComponent },
       { path: 'confirmation/:id', component: ConfirmationPageComponent },
-      { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+      { path: 'login', component: LoginPageComponent },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ]),
   ],

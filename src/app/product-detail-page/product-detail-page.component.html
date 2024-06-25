@@ -1,7 +1,5 @@
 <div class="route-container">
-  <div *ngIf="!product">
-    <mat-spinner [style]="{ margin: 'auto' }" />
-  </div>
+  <spinner [isDisplayed]="!product"/>
 
   <div *ngIf="product" id="product-detail-page-container">
     <img src="{{ product.photoUrl }}" />

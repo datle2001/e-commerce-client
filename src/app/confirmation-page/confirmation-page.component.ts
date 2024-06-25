@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Order } from '../model/order';
 import { CartServices } from '../services/cart.service';
 import { OrderServices } from '../services/order.service';
+import { LoginServices } from '../services/login.service';
 
 @Component({
   templateUrl: './confirmation-page.component.html',
@@ -12,7 +13,8 @@ export class ConfirmationPageComponent implements OnInit {
   constructor(
     private cartServices: CartServices,
     protected orderServices: OrderServices,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private loginServices: LoginServices
   ) {}
 
   protected confirmedOrder: Order | undefined;
@@ -20,7 +22,6 @@ export class ConfirmationPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartServices.removeAllProducts();
-
     this.getOrder();
   }
 

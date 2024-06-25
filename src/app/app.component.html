@@ -1,4 +1,4 @@
-<top-root />
-<div>
-  <router-outlet />
-</div>
+<top-root *ngIf="!isLoginUrl()"/>
+<router-outlet />
+
+

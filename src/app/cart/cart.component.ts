@@ -5,7 +5,9 @@ import { Product } from '../model/product';
 import { CartServices } from '../services/cart.service';
 import { OrderServices } from '../services/order.service';
 import { ToastServices } from '../services/toast.service';
-import { delay as delayFor } from '../share/helpers';
+import { delay as delayFor, redirectTo } from '../share/helpers';
+import { OrderState, ToastType } from '../share/enums';
+import { LoginServices } from '../services/login.service';
 
 @Component({
   templateUrl: './cart.component.html',
@@ -15,8 +17,9 @@ export class CartComponent {
   constructor(
     protected cartService: CartServices,
     private toastService: ToastServices,
-    private orderServices: OrderServices,
-    private router: Router
+    protected orderServices: OrderServices,
+    private router: Router,
+    private loginServices: LoginServices
   ) {}
 
   /**
@@ -26,8 +29,9 @@ export class CartComponent {
   protected onRemoveClick(product: Product): void {
     this.cartService.removeProduct(product);
 
-    this.toastService.showSuccessToast(
-      `${product.name} removed from your cart`
+    this.toastService.showToast(
+      `${product.name} removed from your cart`,
+      ToastType.SUCCESS
     );
   }
 
@@ -35,26 +39,31 @@ export class CartComponent {
    * Triggers on Checkout button being clicked
    */
   protected onCheckOutClick(): void {
-    //TODO: show a spinner here
+    if(this.loginServices.hasLoggedIn()) {
+      this.orderServices.setOrderState(OrderState.SUBMITTING);
 
-    this.orderServices.createOrder().subscribe({
-      next: (paymentLink: any) => {
-        //TODO: hide the spinner here
-        console.log(paymentLink['after_completion']);
+      this.orderServices.createOrder().subscribe({
+        next: (paymentLink: any) => {
+          this.orderServices.setOrderState(OrderState.SUBMITTED);
 
-        this.toastService.showSuccessToast(
-          'Thank you for placing an order with us!',
-          globals.toastLongerTimeout
-        );
+          this.toastService.showToast(
+            'Thank you for placing an order with us!',
+            ToastType.SUCCESS,
+            globals.toastLongerTimeout
+          );
 
-        delayFor(globals.toastLongerTimeout);
+          delayFor(globals.toastLongerTimeout);
 
-        //redirectTo(paymentLink.url);
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
+          redirectTo(paymentLink.url);
+        },
+        error: (error) => {
+          this.orderServices.setOrderState(OrderState.NOT_SUBMIITED);
+          console.log(error);
+        },
+      });
+    } else {
+      this.toastService.showToast('You need to login to place orders.', ToastType.WARNING)
+    }
   }
 
   /**
@@ -63,8 +72,9 @@ export class CartComponent {
   protected onRemoveAllClick() {
     this.cartService.removeAllProducts();
 
-    this.toastService.showSuccessToast(
-      'All products have been removed from your cart'
+    this.toastService.showToast(
+      'All products have been removed from your cart',
+      ToastType.SUCCESS
     );
   }
 }

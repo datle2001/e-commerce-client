@@ -1,0 +1,15 @@
+form {
+  margin: auto;
+  margin-top: 20vh;
+  width: fit-content;
+  padding: 20px;
+}
+
+.center {
+  display: flex;
+  justify-content: center
+}
+mat-spinner {
+  margin: auto;
+  margin-top: 20vh;
+}

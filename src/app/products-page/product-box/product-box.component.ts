@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Product } from 'src/app/model/product';
 import { CartServices } from 'src/app/services/cart.service';
 import { ToastServices } from 'src/app/services/toast.service';
+import { ToastType } from 'src/app/share/enums';
 
 @Component({
   selector: 'pb-root',
@@ -23,8 +24,9 @@ export class ProductBoxComponent {
   onAddClick(): void {
     this.cartService.addProduct(this.product);
 
-    this.toastService.showSuccessToast(
-      `${this.product.quantityPick} ${this.product.name}(s) added to your cart`
+    this.toastService.showToast(
+      `${this.product.quantityPick} ${this.product.name}(s) added to your cart`,
+      ToastType.SUCCESS
     );
 
     this.resetQuantitySelect();

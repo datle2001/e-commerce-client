@@ -3,9 +3,7 @@
   SORT BY 
   <mat-select></mat-select>
 </label>-->
-  <div *ngIf="products.length == 0">
-    <mat-spinner [style]="{margin: 'auto'}"/>
-  </div>
+  <spinner [isDisplayed]="products.length == 0"/>
 
   <div *ngIf="products.length > 0">
     <div id="above-list">

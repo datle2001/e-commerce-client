@@ -1,4 +1,5 @@
 <div class="route-container">
+  <spinner [isDisplayed]="orderServices.isOrderSubmitting()"/>
   <div
     style="display: flex; align-items: flex-start"
     *ngIf="cartService.countProducts() > 0"
@@ -32,7 +33,7 @@
         Estimated Total
         <div class="prices">${{ cartService.getSubtotal() + 9.95 }}</div>
       </h4>
-      <button mat-raised-button color="primary" (click)="onCheckOutClick()">
+      <button mat-raised-button color="primary" (click)="onCheckOutClick()" [disabled]="orderServices.isOrderSubmitting()">
         Checkout
       </button>
     </div>
