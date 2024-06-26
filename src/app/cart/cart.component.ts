@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { globals } from 'src/globals';
 import { Product } from '../model/product';
 import { CartServices } from '../services/cart.service';
 import { OrderServices } from '../services/order.service';
@@ -49,10 +48,10 @@ export class CartComponent {
           this.toastService.showToast(
             'Thank you for placing an order with us!',
             ToastType.SUCCESS,
-            globals.toastLongerTimeout
+            2000
           );
 
-          delayFor(globals.toastLongerTimeout);
+          delayFor(2000);
 
           redirectTo(paymentLink.url);
         },
@@ -62,7 +61,7 @@ export class CartComponent {
         },
       });
     } else {
-      this.toastService.showToast('You need to login to place orders.', ToastType.WARNING)
+      this.toastService.showToast('You need to login to place orders.', ToastType.WARNING, 2000)
     }
   }
 

@@ -26,10 +26,6 @@ export class AppComponent implements OnInit, OnDestroy {
           this.cartServices.getSelectedProductsFromLocal();
         },
         error: (error) => {
-          if(error.status == 401) {
-            this.loginServices.deleteToken()
-          }
-
           console.log(error);
         },
       });

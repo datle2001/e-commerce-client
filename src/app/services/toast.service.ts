@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { globals } from 'src/globals';
 import { ToastType } from '../share/enums';
 
 @Injectable({
@@ -16,8 +15,8 @@ export class ToastServices {
   showToast(
     message: string,
     toastType: ToastType,
-    timeout: number | undefined = globals.toastTimeout,
-    easeTime: number | undefined = globals.toastEasingTime
+    timeout: number | undefined = 2000,
+    easeTime: number | undefined = 500
   ): void {
     switch (toastType) {
       case ToastType.SUCCESS:
