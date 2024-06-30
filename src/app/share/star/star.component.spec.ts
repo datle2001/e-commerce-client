@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { NgbRating, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { StarComponent } from './star.component';
 
 describe('StarComponent', () => {
@@ -8,6 +8,7 @@ describe('StarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [NgbRatingModule],
       declarations: [ StarComponent ]
     })
     .compileComponents();

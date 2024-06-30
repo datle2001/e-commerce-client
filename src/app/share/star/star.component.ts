@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { NgbRating } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'star',

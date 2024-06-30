@@ -1,4 +1,4 @@
-<div id="confirmation-product-container">
+<div id="confirmation-product-container" *ngIf="orderedProduct">
   <img src="{{ orderedProduct.product.photoUrl }}" />
   <div id="detail-container">
     <div style="text-align: left">

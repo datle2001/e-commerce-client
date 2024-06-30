@@ -9,7 +9,7 @@ import { CartServices } from '../../services/cart.service';
 })
 export class CartProductComponent {
   @Input()
-  product!: Product;
+  product: Product | undefined;
   @Output() onRemove = new EventEmitter<Product>();
   quantityOptions: number[] = Array.from({ length: 10 }, (_, i) => i + 1);
 
@@ -19,7 +19,7 @@ export class CartProductComponent {
   }
 
   protected setQuantitySelect($event: number) {
-    this.product.quantityPick = $event;
+    this.product!.quantityPick = $event;
     this.cartService.saveSelectedProductsToLocal();
   }
 }

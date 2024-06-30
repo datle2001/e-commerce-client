@@ -1,4 +1,4 @@
-<div id="cart-product-container">
+<div id="cart-product-container" *ngIf="product">
   <img src="{{ product.photoUrl }}"/>
   <div id="detail-container">
     <p style="font-weight: 600; font-size: larger;">{{ product.name }}</p>

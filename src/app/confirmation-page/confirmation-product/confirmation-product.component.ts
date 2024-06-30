@@ -8,5 +8,5 @@ import { OrderedProduct } from 'src/app/model/order';
 })
 export class ConfirmationProductComponent {
   @Input()
-  orderedProduct!: OrderedProduct
+  orderedProduct: OrderedProduct | undefined
 }
