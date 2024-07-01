@@ -8,7 +8,7 @@ import { ToastType } from '../share/enums';
 
 @Component({
   templateUrl: './product-detail-page.component.html',
-  styleUrls: ['./product-detail-page.css'],
+  styleUrls: ['./product-detail-page.component.css'],
 })
 export class ProductDetailPageComponent implements OnInit {
   constructor(
