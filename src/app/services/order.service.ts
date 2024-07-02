@@ -2,11 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Order, OrderedProduct } from '../model/order';
+import { Order, OrderedProduct } from '../models/order';
+import { OrderState } from '../shared/enums';
 import { CartServices } from './cart.service';
-import { ProductServices } from './product.service';
 import { LoginServices } from './login.service';
-import { OrderState } from '../share/enums';
+import { ProductServices } from './product.service';
 
 @Injectable({
   providedIn: 'root',

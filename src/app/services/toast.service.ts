@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { ToastType } from '../share/enums';
+import { ToastType } from '../shared/enums';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,7 @@ export class ToastServices {
   constructor(private toastr: ToastrService) {}
 
   /**
-   * Show success popup with *message*
+   * Show popup with *message*
    * @param message
    */
   showToast(

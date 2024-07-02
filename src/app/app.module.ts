@@ -15,21 +15,23 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
-import { CartProductComponent } from './cart/cart-product/cart-product.component';
-import { CartComponent } from './cart/cart.component';
-import { ConfirmationPageComponent } from './confirmation-page/confirmation-page.component';
-import { ConfirmationProductComponent } from './confirmation-page/confirmation-product/confirmation-product.component';
-import { HomePageComponent } from './home-page/home-page.component';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { ProductDetailPageComponent } from './product-detail-page/product-detail-page.component';
-import { ProductBoxComponent } from './products-page/product-box/product-box.component';
-import { ProductsPageComponent } from './products-page/products-page.component';
+
 import { S3Services } from './services/s3.service';
-import { QuantitySelectComponent } from './share/quantity-select/quantity-select.component';
-import { SpinnerComponent } from './share/spinner/spinner.component';
-import { StarComponent } from './share/star/star.component';
-import { SupportComponent } from './support/support.component';
-import { TopComponent } from './top/top.component';
+import { CartProductComponent } from './components/cart/cart-product/cart-product.component';
+import { CartComponent } from './components/cart/cart.component';
+import { ConfirmationPageComponent } from './components/confirmation-page/confirmation-page.component';
+import { ConfirmationProductComponent } from './components/confirmation-page/confirmation-product/confirmation-product.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
+import { ProductDetailPageComponent } from './components/product-detail-page/product-detail-page.component';
+import { ProductBoxComponent } from './components/products-page/product-box/product-box.component';
+import { ProductsPageComponent } from './components/products-page/products-page.component';
+import { SupportComponent } from './components/support/support.component';
+import { TopComponent } from './components/top/top.component';
+import { QuantitySelectComponent } from './components/shared/quantity-select/quantity-select.component';
+import { SpinnerComponent } from './components/shared/spinner/spinner.component';
+import { StarComponent } from './components/shared/star/star.component';
+
 
 @NgModule({
   declarations: [

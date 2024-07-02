@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartServices } from './services/cart.service';
 import { LoginServices } from './services/login.service';
-import { LoginState } from './share/enums';
+import { LoginState } from './shared/enums';
 
 @Component({
   selector: 'app-root',

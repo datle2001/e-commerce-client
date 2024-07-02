@@ -2,9 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { TopComponent } from './top/top.component';
 import { ToastrModule } from 'ngx-toastr';
 import { MatBadgeModule } from '@angular/material/badge';
+import { TopComponent } from './components/top/top.component';
 
 describe('AppComponent', () => {
   let component: AppComponent;

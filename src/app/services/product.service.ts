@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Product } from '../model/product';
+import { Product } from '../models/product';
 import { LoginServices } from './login.service';
 
 @Injectable({
@@ -10,15 +10,31 @@ import { LoginServices } from './login.service';
 })
 export class ProductServices {
   constructor(private http: HttpClient, private loginServices: LoginServices) {}
-
+  public products: Product[]  = [];
   private productsUrl = `${environment.api.url}/products`;
 
   /**
    * Get all products from API
    * @returns an array of products
    */
-  getProducts(): Observable<Array<JSON>> {
-    return this.http.get<Array<JSON>>(this.productsUrl);
+  getProducts(): void {
+    if(this.products.length > 0) {
+      return;
+    }
+    
+    this.http.get<Array<JSON>>(this.productsUrl).subscribe({
+      next: (rawProducts) => {
+        rawProducts.forEach((rawProduct: any) => {
+          let product = this.initProductFrom(rawProduct);
+
+          // add the instance to the Product array
+          this.products.push(product);
+        });
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });;
   }
 
   /**

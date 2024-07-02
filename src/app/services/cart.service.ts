@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Product } from '../model/product';
-import { decycle } from '../share/helpers';
+import { Product } from '../models/product';
+import { decycle } from '../shared/helpers';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartServices {
-  private SELECTED_PRODUCTS_KEY = 'selectedProducts';
+  private SELECTED_PRODUCTS_KEY: string = 'selected-products';
   selectedProducts: Product[] = [];
   private onSelectedProductChange: Subject<Product[]> = new Subject();
 

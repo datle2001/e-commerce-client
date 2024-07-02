@@ -1,0 +1,26 @@
+<div class="route-container">
+  <!--<label>
+  SORT BY 
+  <mat-select></mat-select>
+</label>-->
+  <spinner [isDisplayed]="products.length == 0"/>
+
+  <div *ngIf="products.length > 0">
+    <div id="above-list">
+      <mat-label style="float: right">
+        Filter by:
+        <input matInput type="text" [(ngModel)]="nameFilter" />
+      </mat-label>
+
+      <h2 style="float: left">{{ filteredProducts.length }} RESULTS</h2>
+    </div>
+
+    <mat-grid-list [cols]="cols" gutterSize="10px" rowHeight="2:5">
+      <ng-container *ngFor="let product of filteredProducts">
+        <mat-grid-tile>
+          <pb-root [product]="product" />
+        </mat-grid-tile>
+      </ng-container>
+    </mat-grid-list>
+  </div>
+</div>
