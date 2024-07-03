@@ -16,7 +16,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 
-import { S3Services } from './services/s3.service';
+// import { S3Services } from './services/s3.service';
 import { CartProductComponent } from './components/cart/cart-product/cart-product.component';
 import { CartComponent } from './components/cart/cart.component';
 import { ConfirmationPageComponent } from './components/confirmation-page/confirmation-page.component';
@@ -31,7 +31,6 @@ import { TopComponent } from './components/top/top.component';
 import { QuantitySelectComponent } from './components/shared/quantity-select/quantity-select.component';
 import { SpinnerComponent } from './components/shared/spinner/spinner.component';
 import { StarComponent } from './components/shared/star/star.component';
-
 
 @NgModule({
   declarations: [
@@ -82,7 +81,7 @@ import { StarComponent } from './components/shared/star/star.component';
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ]),
   ],
-  providers: [S3Services],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
