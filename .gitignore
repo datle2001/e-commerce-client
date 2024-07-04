@@ -36,6 +36,10 @@ yarn-error.log
 testem.log
 /typings
 src/environments/.env
+/.vscode
+/image-header
+/image-welcome-page
+/products
 
 # System files
 .DS_Store
