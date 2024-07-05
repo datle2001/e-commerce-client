@@ -5,9 +5,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build && git add -A && git commit -F - && git push",
+    "test": "ng test",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "build": "ng build && npm run copy-index-to-404 && npm run commit-push",
+    "copy-index-to-404": "npm install -g shx && cd docs && dir && shx cp index.html 404.html",
+    "commit-push": "git add -A && git commit -F - && git push"
   },
   "private": true,
   "dependencies": {
