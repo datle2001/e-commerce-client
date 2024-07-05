@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build && git add -A && git commit -m message && git push",
+    "build": "ng build && git add -A && git commit -F - && git push",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
