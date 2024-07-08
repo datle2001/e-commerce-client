@@ -16,3 +16,6 @@ mat-spinner {
 mat-form-field {
   width: 400px;
 }
+.route-container {
+  background-color: white;
+}

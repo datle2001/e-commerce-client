@@ -8,7 +8,7 @@
       "schematics": {},
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -23,7 +23,8 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "@angular/material/prebuilt-themes/purple-green.css",
-              "src/styles.css"
+              "src/styles.css",
+              "src/theme.scss"
             ],
             "scripts": []
           },
@@ -38,7 +39,7 @@
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "4kb",
-                  "maximumError": "8kb"
+                  "maximumError": "250kb"
                 }
               ],
               "outputHashing": "all"

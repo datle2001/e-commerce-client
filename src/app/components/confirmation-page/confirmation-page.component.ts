@@ -18,15 +18,13 @@ export class ConfirmationPageComponent implements OnInit {
     private cartServices: CartServices,
     protected orderServices: OrderServices,
     private route: ActivatedRoute  ) {
-      console.log('haha');
     }
 
   protected confirmedOrder: Order | undefined;
-  protected orderId = this.route.snapshot.paramMap.get('id')!;
+  protected orderId: string = '';
 
   ngOnInit(): void {
-    console.log('haha');
-    
+    this.orderId = this.route.snapshot.paramMap.get('id')!;
     this.cartServices.removeAllProducts();
     this.getOrder();
   }

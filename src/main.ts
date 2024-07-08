@@ -6,21 +6,32 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, Routes } from '@angular/router';
 import { provideToastr } from 'ngx-toastr';
 import { AppComponent } from './app/app.component';
+import { ProductDetailPageComponent } from '@components/product-detail-page/product-detail-page.component';
 
 export const routes: Routes = [
+  {
+    path: '',
+    loadComponent: () =>
+      import('@components/home-page/home-page.component').then(
+        (m) => m.HomePageComponent
+      ),
+  },
   {
     path: 'products',
     loadComponent: () =>
       import('@components/products-page/products-page.component').then(
         (m) => m.ProductsPageComponent
       ),
+    pathMatch: 'full',
   },
   {
     path: 'products/:id',
-    loadComponent: () =>
-      import(
-        '@components/product-detail-page/product-detail-page.component'
-      ).then((m) => m.ProductDetailPageComponent),
+    component: ProductDetailPageComponent,
+    // loadComponent: () =>
+    //   import(
+    //     '@components/product-detail-page/product-detail-page.component'
+    //   ).then((m) => m.ProductDetailPageComponent),
+    pathMatch: 'full',
   },
   {
     path: 'cart',
@@ -55,13 +66,7 @@ export const routes: Routes = [
         (m) => m.UserPageComponent
       ),
   },
-  {
-    path: '',
-    loadComponent: () =>
-      import('@components/home-page/home-page.component').then(
-        (m) => m.HomePageComponent
-      ),
-  },
+
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
@@ -74,6 +79,6 @@ bootstrapApplication(AppComponent, {
       positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
-    provideHttpClient(),
+    provideHttpClient()
   ],
 }).catch((err) => console.log(err));

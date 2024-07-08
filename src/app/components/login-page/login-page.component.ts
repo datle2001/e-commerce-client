@@ -12,20 +12,20 @@ import { LoginServices } from 'src/app/services/login.service';
 import { ToastServices } from 'src/app/services/toast.service';
 import { LoginState, ToastType } from 'src/app/shared/enums';
 import { SpinnerComponent } from '../shared/spinner/spinner.component';
-import { HttpClientModule } from '@angular/common/http';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
   selector: 'login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.css'],
+  styleUrls: ['./login-page.component.css', '../../../theme.scss'],
   standalone: true,
   imports: [
     MatButtonModule,
-    MatIconModule,
     MatInputModule,
     MatFormFieldModule,
     SpinnerComponent,
     FormsModule,
+    MatNativeDateModule,
   ],
 })
 export class LoginPageComponent {

@@ -1,10 +1,10 @@
-<div class="route-container">
+<div class="login-page">
   <spinner [isDisplayed]="loginServices.isLoggingIn()" />
 
-  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+  <form (ngSubmit)="onSubmit()">
     <mat-form-field>
       <mat-label>Email</mat-label>
-      <input matInput type="email" [(ngModel)]="loginInfo.email" name="email" />
+      <input matInput type="email" [(ngModel)]="loginInfo.email" name="email" matNativeControl />
     </mat-form-field>
 
     <br />
@@ -22,7 +22,9 @@
     <br />
     <div class="center">
       <button
-        mat-button
+        class="tertiary-button"
+        mat-raised-button
+        appearance="fill"
         type="submit"
         [disabled]="!loginInfo.isReadyToSubmit() || loginServices.isLoggingIn()"
       >

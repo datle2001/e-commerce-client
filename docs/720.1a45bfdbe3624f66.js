@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunke_commerce_client=self.webpackChunke_commerce_client||[]).push([[720],{6720:(o,t,s)=>{s.r(t),s.d(t,{UserPageComponent:()=>e});var n=s(4650);class e{}e.\u0275fac=function(c){return new(c||e)},e.\u0275cmp=n.Xpm({type:e,selectors:[["app-user-page"]],decls:2,vars:0,template:function(c,p){1&c&&(n.TgZ(0,"p"),n._uU(1,"user-page works!"),n.qZA())}})}}]);

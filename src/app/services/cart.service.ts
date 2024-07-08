@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { SelectedProduct } from '../models/selected-product';
-import { Product } from '../models/product';
 import { decycle } from '../shared/helpers';
 
 @Injectable({
@@ -29,7 +28,7 @@ export class CartServices {
   /**
    * Get selected products from local storage (if any)
    */
-  getSelectedProductsFromLocal(): void {
+  getSelectedProductsFromLocalStorage(): void {
     const savedSelectedProducts = localStorage.getItem(
       this.SELECTED_PRODUCTS_KEY
     );
@@ -98,10 +97,7 @@ export class CartServices {
   countProducts(): number {
     console.log('count products');
 
-    return this.selectedProducts.reduce(
-      (sum, sp) => sum + sp.quantity,
-      0
-    );
+    return this.selectedProducts.reduce((sum, sp) => sum + sp.quantity, 0);
   }
 
   /**
@@ -110,7 +106,7 @@ export class CartServices {
    */
   getSubtotal(): number {
     return this.selectedProducts.reduce(
-      (sum, sp) => sum +  sp.product.price * sp.quantity,
+      (sum, sp) => sum + sp.product.price * sp.quantity,
       0
     );
   }

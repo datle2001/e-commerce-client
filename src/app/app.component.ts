@@ -1,8 +1,6 @@
 import { NgIf } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { ToastrModule } from 'ngx-toastr';
 import { TopComponent } from './components/top/top.component';
 import { CartServices } from './services/cart.service';
 import { LoginServices } from './services/login.service';
@@ -29,7 +27,7 @@ export class AppComponent implements OnInit, OnDestroy {
         next: ({ token, user }) => {
           this.loginServices.setLoginState(LoginState.LOGGED_IN);
           this.loginServices.setToken(token);
-          this.cartServices.getSelectedProductsFromLocal();
+          this.cartServices.getSelectedProductsFromLocalStorage();
         },
         error: (error) => {
           console.log(error);

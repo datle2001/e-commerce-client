@@ -10,12 +10,13 @@ import { MatDividerModule } from '@angular/material/divider';
 import { QuantitySelectComponent } from '../shared/quantity-select/quantity-select.component';
 import { StarComponent } from '../shared/star/star.component';
 import { NgIf } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   templateUrl: './product-detail-page.component.html',
   styleUrls: ['./product-detail-page.component.css'],
   standalone: true,
-  imports: [SpinnerComponent, MatDividerModule, QuantitySelectComponent, StarComponent, NgIf]
+  imports: [SpinnerComponent, MatDividerModule, QuantitySelectComponent, StarComponent, NgIf, MatButtonModule]
 })
 export class ProductDetailPageComponent implements OnInit {
   constructor(
