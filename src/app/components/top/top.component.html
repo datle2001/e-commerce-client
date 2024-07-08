@@ -1,31 +1,38 @@
-<div id="top">
-  <a routerLink="/">
-    <img
-      src="{{ headerImageLink }}shop_logo.jpg"
-      id="shopLogo"
-      alt="Shop logo"
-    />
-  </a>
-  <a routerLink="/products" style="font-size: x-large; margin-left: 100px">
-    Products
-  </a>
-  <a routerLink="/support" style="font-size: x-large; margin-left: 100px">
-    Support
-  </a>
-  <div id="right">
-    <a routerLink="cart">
-      <i
-        class="bi bi-cart4"
-        id="cartLogo"
-        matBadge="{{ cartServices.countProducts() }}"
-        matBadgeHidden="{{ cartServices.countProducts() == 0 }}"
-      ></i>
-    </a>
-
-    <img
-      src="{{ headerImageLink }}{{loginServices.hasLoggedIn() ? 'account_logo' : 'login-icon'}}.jpg"
-      id="accountLogo"
-      alt="Account"
-      (click)="onAccountLogoClick()"/>
+<div id="nav-bar">
+  <div id="nav-links" *ngIf="!condenseNavLinks" >
+    <a routerLink="">Home <mat-icon fontIcon="home" inline="true"/></a>
+    <a routerLink="products">Products <mat-icon fontIcon="store"/></a>
+    <a routerLink="confirmation/242">Support <mat-icon fontIcon="help"/></a>
   </div>
+      
+
+  <div>
+    <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="condenseIcons">
+      <mat-icon fontIcon="menu" />
+    </button>
+    
+    <div *ngIf="!condenseIcons" id="screen-not-small-icons">
+      <button id="first-icon" mat-icon-button routerLink="cart">
+        <mat-icon fontIcon="shopping_cart"
+        matBadge="{{ cartServices.countProducts() }}"
+        matBadgeHidden="{{ cartServices.selectedProducts.length == 0 }}"
+          />
+      </button>
+      
+      <button mat-icon-button routerLink="user">
+        <mat-icon fontIcon="person_outline"/>
+      </button>
+
+      <button mat-icon-button (click)="onAccountLogoClick()">
+        <mat-icon fontIcon="{{loginServices.hasLoggedIn() ? 'logout' : 'login'}}"></mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>dialpad</mat-icon>
+      <span>Redial</span>
+    </button>
+  </mat-menu>
 </div>

@@ -1,10 +1,18 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { ProductServices } from 'src/app/services/product.service';
+import { SpinnerComponent } from '../shared/spinner/spinner.component';
+import { FormsModule } from '@angular/forms';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { ProductBoxComponent } from './product-box/product-box.component';
+import { NgFor, NgIf } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   templateUrl: './products-page.component.html',
   styleUrls: ['./products-page.component.css'],
+  standalone: true,
+  imports: [SpinnerComponent, FormsModule, MatGridListModule, ProductBoxComponent, NgIf, NgFor, MatFormFieldModule]
 })
 export class ProductsPageComponent implements OnInit {
   constructor(private productServices: ProductServices) {}
@@ -12,11 +20,10 @@ export class ProductsPageComponent implements OnInit {
   private _nameFilter: string = '';
   protected products: Product[] = this.productServices.products;
   protected filteredProducts: Product[] = this.products;
-  private MAX_COLS_PER_ROW = 4;
-  private MAX_SCREEN_WIDTH = window.screen.availWidth;
-  protected cols: number = this.MAX_COLS_PER_ROW;
+  protected cols: number | undefined ;
 
   ngOnInit(): void {
+    this.onResize();
     this.productServices.getProducts();
   }
 
@@ -34,8 +41,6 @@ export class ProductsPageComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   onResize() {
-    this.cols = Math.round(
-      (innerWidth / this.MAX_SCREEN_WIDTH) * this.MAX_COLS_PER_ROW
-    );
+    this.cols = Math.floor(innerWidth * 0.9 / 270);
   }
 }

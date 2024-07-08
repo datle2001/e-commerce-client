@@ -16,6 +16,10 @@ img {
   width: 100%;
   margin-left: 10px;
 }
+#detail-container:nth-child(1) {
+  font-weight: 600;
+  font-size: larger;
+}
 i {
   display: inline-block;
   font-size: 30px;

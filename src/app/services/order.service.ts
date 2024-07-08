@@ -38,6 +38,8 @@ export class OrderServices {
    * @returns
    */
   createOrder(): Observable<any> {
+    console.log(this.cartServices.selectedProducts);
+    
     return this.http.post(this.orderUrl, this.cartServices.selectedProducts, {
       headers: this.loginServices.getHeaders(),
     });

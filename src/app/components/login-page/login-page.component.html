@@ -1,19 +1,28 @@
 <div class="route-container">
   <spinner [isDisplayed]="loginServices.isLoggingIn()" />
 
-  <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
-    <label>
-      Email <br />
-      <input type="email" [(ngModel)]="loginInfo.email" name="email" />
-    </label>
-    <br /><br />
-    <label>
-      Password <br />
-      <input type="password" [(ngModel)]="loginInfo.password" name="password" />
-    </label>
-    <br /><br />
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput type="email" [(ngModel)]="loginInfo.email" name="email" />
+    </mat-form-field>
+
+    <br />
+
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        type="password"
+        [(ngModel)]="loginInfo.password"
+        name="password"
+      />
+    </mat-form-field>
+
+    <br />
     <div class="center">
       <button
+        mat-button
         type="submit"
         [disabled]="!loginInfo.isReadyToSubmit() || loginServices.isLoggingIn()"
       >

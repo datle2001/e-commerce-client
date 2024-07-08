@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { SelectedProduct } from '../models/selected-product';
 import { Product } from '../models/product';
 import { decycle } from '../shared/helpers';
 
@@ -8,8 +9,8 @@ import { decycle } from '../shared/helpers';
 })
 export class CartServices {
   private SELECTED_PRODUCTS_KEY: string = 'selected-products';
-  selectedProducts: Product[] = [];
-  private onSelectedProductChange: Subject<Product[]> = new Subject();
+  selectedProducts: SelectedProduct[] = [];
+  private onSelectedProductChange: Subject<SelectedProduct[]> = new Subject();
 
   constructor() {
     this.setTriggerOnSelectedProductsChange();
@@ -45,6 +46,7 @@ export class CartServices {
   private setTriggerOnSelectedProductsChange(): void {
     this.onSelectedProductChange.subscribe((changedSelectedProducts) => {
       this.selectedProducts = changedSelectedProducts;
+
       this.saveSelectedProductsToLocal();
     });
   }
@@ -54,18 +56,18 @@ export class CartServices {
    * @param product
    * @param quantitySelect
    */
-  addProduct(product: Product): void {
+  addProduct(selectedProduct: SelectedProduct): void {
     const target = this.selectedProducts.find(
-      (prod: Product) => prod.id === product.id
-    )!;
+      (sp: SelectedProduct) => sp.product.id === selectedProduct.product.id
+    );
 
     if (!target) {
       this.onSelectedProductChange.next([
         ...this.selectedProducts,
-        Product.clone(product),
+        selectedProduct,
       ]);
     } else {
-      target.quantityPick += product.quantityPick;
+      target.quantity += selectedProduct.quantity;
       this.onSelectedProductChange.next(this.selectedProducts);
     }
   }
@@ -74,9 +76,9 @@ export class CartServices {
    * Remove *product* from cart
    * @param product
    */
-  removeProduct(product: Product): void {
+  removeProduct(productId: string): void {
     const changedSelectedProducts = this.selectedProducts.filter(
-      (prod: Product) => prod.id !== product.id
+      (sp: SelectedProduct) => sp.product.id !== productId
     );
 
     this.onSelectedProductChange.next(changedSelectedProducts);
@@ -94,8 +96,10 @@ export class CartServices {
    * @returns total number of products
    */
   countProducts(): number {
+    console.log('count products');
+
     return this.selectedProducts.reduce(
-      (sum, product) => sum + product.quantityPick,
+      (sum, sp) => sum + sp.quantity,
       0
     );
   }
@@ -106,7 +110,7 @@ export class CartServices {
    */
   getSubtotal(): number {
     return this.selectedProducts.reduce(
-      (sum, product) => sum + product.price * product.quantityPick,
+      (sum, sp) => sum +  sp.product.price * sp.quantity,
       0
     );
   }

@@ -1,16 +1,32 @@
 import { Component } from '@angular/core';
 import '@angular/forms';
+import { FormControl, FormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LoginInfo } from 'src/app/models/loginInfo';
 import { LoginServices } from 'src/app/services/login.service';
 import { ToastServices } from 'src/app/services/toast.service';
 import { LoginState, ToastType } from 'src/app/shared/enums';
+import { SpinnerComponent } from '../shared/spinner/spinner.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.css'],
+  standalone: true,
+  imports: [
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule,
+    MatFormFieldModule,
+    SpinnerComponent,
+    FormsModule,
+  ],
 })
 export class LoginPageComponent {
   constructor(
@@ -18,6 +34,11 @@ export class LoginPageComponent {
     private router: Router,
     private toastServices: ToastServices
   ) {}
+
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
 
   loginInfo: LoginInfo = this.loginServices.loginInfo;
 

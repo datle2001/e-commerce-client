@@ -7,7 +7,7 @@
       </p>
       <p>Item #{{ orderedProduct.product.id }}</p>
       <p>Price: ${{ orderedProduct.product.price }}</p>
-      <p>Quantity: {{ orderedProduct.orderedQuantity }}</p>
+      <p>Quantity: {{ orderedProduct.quantity }}</p>
     </div>
 
     <p
@@ -19,7 +19,7 @@
       "
     >
       Total: ${{
-        orderedProduct.orderedQuantity * orderedProduct.product.price
+        orderedProduct.quantity * orderedProduct.product.price
       }}
     </p>
   </div>

@@ -7,9 +7,12 @@ form {
 
 .center {
   display: flex;
-  justify-content: center
+  justify-content: center;
 }
 mat-spinner {
   margin: auto;
   margin-top: 20vh;
+}
+mat-form-field {
+  width: 400px;
 }

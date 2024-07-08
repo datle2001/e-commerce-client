@@ -1,5 +1,9 @@
+import { NgIf } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
+import { ToastrModule } from 'ngx-toastr';
+import { TopComponent } from './components/top/top.component';
 import { CartServices } from './services/cart.service';
 import { LoginServices } from './services/login.service';
 import { LoginState } from './shared/enums';
@@ -8,6 +12,8 @@ import { LoginState } from './shared/enums';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  standalone: true,
+  imports: [TopComponent, RouterOutlet, NgIf],
 })
 export class AppComponent implements OnInit, OnDestroy {
   constructor(

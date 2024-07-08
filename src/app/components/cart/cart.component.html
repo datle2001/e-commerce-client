@@ -2,7 +2,7 @@
   <spinner [isDisplayed]="orderServices.isOrderSubmitting()"/>
   <div
     style="display: flex; align-items: flex-start"
-    *ngIf="cartServices.countProducts() > 0"
+    *ngIf="cartServices.selectedProducts.length > 0"
   >
     <div style="display: inline-block; width: 70%">
       <h1>
@@ -12,9 +12,9 @@
         </h2>
       </h1>
       <mat-divider />
-      <div *ngFor="let product of cartServices.selectedProducts">
-        <app-cart-product
-          [product]="product"
+      <div *ngFor="let sp of cartServices.selectedProducts">
+        <cart-product
+          [selectedProduct]="sp"
           (onRemove)="onRemoveClick($event)"
         />
       </div>
@@ -33,13 +33,13 @@
         Estimated Total
         <div class="prices">${{ cartServices.getSubtotal() + 9.95 }}</div>
       </h4>
-      <button mat-raised-button color="primary" (click)="onCheckOutClick()" [disabled]="orderServices.isOrderSubmitting()">
+      <button mat-raised-button (click)="onCheckoutClick()" [disabled]="orderServices.isOrderSubmitting()">
         Checkout
       </button>
     </div>
   </div>
 
-  <h1 *ngIf="cartServices.countProducts() == 0">
+  <h1 *ngIf="cartServices.selectedProducts.length == 0">
     Your cart is empty. Click <a routerLink="/products">here</a> to go back to
     Products page.
   </h1>

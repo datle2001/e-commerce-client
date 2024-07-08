@@ -42,8 +42,8 @@ export class ProductServices {
    * @param id
    * @returns a single product
    */
-  getProductById(id: string): Observable<JSON> {
-    return this.http.get<JSON>(`${this.productsUrl}/${id}`);
+  getProductById(id: string): Observable<any> {
+    return this.http.get(`${this.productsUrl}/${id}`);
   }
 
   /**

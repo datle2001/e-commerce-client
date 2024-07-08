@@ -4,7 +4,9 @@ import { NgbRating } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'star',
   templateUrl: './star.component.html',
-  styleUrls: ['./star.component.css']
+  styleUrls: ['./star.component.css'],
+  standalone: true,
+  imports: [NgbRating]
 })
 export class StarComponent {
  @Input()

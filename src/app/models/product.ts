@@ -7,7 +7,6 @@ export class Product {
     public photoUrl: string,
     public rating: number,
     public numRating: number,
-    public quantityPick: number = 1
   ) {}
 
   static clone(product: Product): Product {
@@ -19,7 +18,6 @@ export class Product {
       product.photoUrl,
       product.rating,
       product.numRating,
-      product.quantityPick
     );
   }
 }

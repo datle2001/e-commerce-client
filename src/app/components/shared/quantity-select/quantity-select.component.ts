@@ -3,7 +3,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'quant-select',
   templateUrl: './quantity-select.component.html',
-  styleUrls: ['./quantity-select.component.css']
+  styleUrls: ['./quantity-select.component.css'],
+  standalone: true,
 })
 export class QuantitySelectComponent {
   @Input()

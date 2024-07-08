@@ -15,3 +15,9 @@ export enum ToastType {
   ERROR = 'Error',
   WARNING = 'Warning'
 }
+
+export enum ScreenSize {
+  MINI,
+  SMALL,
+  NORMAL,
+}

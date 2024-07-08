@@ -2,4 +2,5 @@ mat-spinner {
   position: fixed;
   top: 30vh;
   left: 45vw;
+  z-index: 4;
 }

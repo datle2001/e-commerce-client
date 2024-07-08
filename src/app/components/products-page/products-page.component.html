@@ -1,4 +1,4 @@
-<div class="route-container">
+<div class="route-container" id="product-page">
   <!--<label>
   SORT BY 
   <mat-select></mat-select>
@@ -7,15 +7,14 @@
 
   <div *ngIf="products.length > 0">
     <div id="above-list">
-      <mat-label style="float: right">
-        Filter by:
-        <input matInput type="text" [(ngModel)]="nameFilter" />
-      </mat-label>
-
-      <h2 style="float: left">{{ filteredProducts.length }} RESULTS</h2>
+      <h2>{{ filteredProducts.length }} RESULTS</h2>
+      
+      <label>Filter:
+        <input matInput type="text" [(ngModel)]="nameFilter" name="filter"/> 
+      </label>
     </div>
 
-    <mat-grid-list [cols]="cols" gutterSize="10px" rowHeight="2:5">
+    <mat-grid-list [cols]="cols" rowHeight="580px">
       <ng-container *ngFor="let product of filteredProducts">
         <mat-grid-tile>
           <pb-root [product]="product" />

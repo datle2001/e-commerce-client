@@ -1,31 +1,11 @@
-mat-grid-list,
-#above-list {
-  display: inline-block;
+mat-grid-list {
+  width: 90%;
   margin: auto;
-  width: 80vw;
 }
-
 #above-list {
-  padding: 12px;
-  padding-bottom: 0;
-}
-pb-root {
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
   margin: auto;
-  border: 0.5px solid grey;
-  padding: 1em;
-  height: fit-content;
-  width: fit-content;
-}
-@media (max-width: 650px) {
-  mat-grid-list,
-  #above-list {
-    margin: auto;
-    width: 90vw;
-  }
-}
-@media (max-width: 512px) {
-  pb-root {
-    scale: 1.7;
-  }
+  padding: 10px;
 }

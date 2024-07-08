@@ -5,10 +5,17 @@ import { CartServices } from 'src/app/services/cart.service';
 import { ProductServices } from 'src/app/services/product.service';
 import { ToastServices } from 'src/app/services/toast.service';
 import { ToastType } from 'src/app/shared/enums';
+import { SpinnerComponent } from '../shared/spinner/spinner.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { QuantitySelectComponent } from '../shared/quantity-select/quantity-select.component';
+import { StarComponent } from '../shared/star/star.component';
+import { NgIf } from '@angular/common';
 
 @Component({
   templateUrl: './product-detail-page.component.html',
   styleUrls: ['./product-detail-page.component.css'],
+  standalone: true,
+  imports: [SpinnerComponent, MatDividerModule, QuantitySelectComponent, StarComponent, NgIf]
 })
 export class ProductDetailPageComponent implements OnInit {
   constructor(
@@ -20,6 +27,7 @@ export class ProductDetailPageComponent implements OnInit {
 
   protected product: Product | undefined;
   protected id = this.route.snapshot.paramMap.get('id')!;
+  protected quantity: number = 1;
 
   ngOnInit(): void {
     this.getProduct();
@@ -40,27 +48,26 @@ export class ProductDetailPageComponent implements OnInit {
   }
 
   protected setQuantitySelect(quantitySelect: number) {
-    this.product!.quantityPick = quantitySelect;
-  }
-
-  protected resetQuantitySelect() {
-    this.product!.quantityPick = 1;
+    this.quantity = quantitySelect;
   }
 
   /**
    * Triggers on Add button clicked
    */
   protected onAddClick(): void {
-    this.cartServices.addProduct(this.product!);
+    this.cartServices.addProduct({
+      product: this.product!,
+      quantity: this.quantity,
+    });
 
     this.toastServices.showToast(
-      `${this.product!.quantityPick} ${
+      `${this.quantity} ${
         this.product!.name
       }(s) added to your cart`,
       ToastType.SUCCESS
     );
 
-    this.resetQuantitySelect();
+    this.setQuantitySelect(1);
   }
 
   /**

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { ActiveToast, ToastrService } from 'ngx-toastr';
 import { ToastType } from '../shared/enums';
 
 @Injectable({
@@ -12,31 +12,21 @@ export class ToastServices {
    * Show popup with *message*
    * @param message
    */
-  showToast(
-    message: string,
-    toastType: ToastType,
-    timeout: number | undefined = 2000,
-    easeTime: number | undefined = 500
-  ): void {
+  showToast(message: string, toastType: ToastType): ActiveToast<any> {
+    let activeToast: ActiveToast<any>;
+
     switch (toastType) {
       case ToastType.SUCCESS:
-        this.toastr.success(message, toastType, {
-          timeOut: timeout,
-          easeTime: easeTime,
-        });
+        activeToast = this.toastr.success(message, toastType);
         break;
       case ToastType.ERROR:
-        this.toastr.error(message, toastType, {
-          timeOut: timeout,
-          easeTime: easeTime,
-        });
+        activeToast = this.toastr.error(message, toastType);
         break;
       case ToastType.WARNING:
-        this.toastr.warning(message, toastType, {
-          timeOut: timeout,
-          easeTime: easeTime,
-        });
+        activeToast = this.toastr.warning(message, toastType);
         break;
     }
+
+    return activeToast;
   }
 }

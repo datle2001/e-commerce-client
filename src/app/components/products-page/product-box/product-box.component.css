@@ -1,6 +1,13 @@
+#product-box {
+  border: 2px solid rgb(255, 227, 166);
+  padding: 20px;
+  height: 550px;
+  width: 250px;
+}
+
 img {
   display: block;
-  width: 100%;
+  width: 200px;
   height: 15em;
 }
 

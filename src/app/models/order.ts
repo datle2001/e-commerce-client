@@ -21,7 +21,7 @@ export class Order {
     this.orderedProducts.forEach((orderedProduct) => {
       if (orderedProduct.canFulfill) {
         this.subtotal +=
-          orderedProduct.product.price * orderedProduct.orderedQuantity;
+          orderedProduct.product.price * orderedProduct.quantity;
       }
     });
   }
@@ -39,6 +39,6 @@ export class OrderedProduct {
   constructor(
     public product: Product,
     public canFulfill: boolean,
-    public orderedQuantity: number
+    public quantity: number
   ) {}
 }

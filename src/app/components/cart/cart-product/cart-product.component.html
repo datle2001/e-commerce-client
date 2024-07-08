@@ -1,15 +1,15 @@
-<div id="cart-product-container" *ngIf="product">
-  <img src="{{ product.photoUrl }}"/>
+<div id="cart-product-container" *ngIf="selectedProduct">
+  <img src="{{ selectedProduct.product.photoUrl }}"/>
   <div id="detail-container">
-    <p style="font-weight: 600; font-size: larger;">{{ product.name }}</p>
-    <p>Item #{{ product.id }}</p>
-    <p>${{product.price}}</p>
+    <p>{{ selectedProduct.product.name }}</p>
+    <p>Item #{{ selectedProduct.product.id }}</p>
+    <p>${{selectedProduct.product.price}}</p>
     <div style="display: flex; position: relative; align-items: center">
       <div style="display: flex; position: relative; align-items: center; width: 90%;">
-        <quant-select [quant]="product.quantityPick" (onClick)="setQuantitySelect($event)"/>
+        <quant-select [quant]="selectedProduct.quantity" (onClick)="setQuantitySelect($event)"/>
         <i (click)="onRemoveClick()" class="bi bi-trash2"></i>
       </div>
-      <p style="position: relative; margin-top: auto;margin-bottom: auto; display:inline-block; width: 10%; text-align: end;">${{product.quantityPick*product.price}}</p>
+      <p style="position: relative; margin-top: auto;margin-bottom: auto; display:inline-block; width: 10%; text-align: end;">${{selectedProduct.quantity*selectedProduct.product.price}}</p>
   </div>
 </div>
 
