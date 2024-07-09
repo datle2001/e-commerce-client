@@ -1,7 +1,6 @@
 {
   "name": "e-commerce-client",
   "version": "0.0.0",
-  "homepage": "https://datle2001.github.io/e-commerce-client/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
