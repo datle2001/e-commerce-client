@@ -29,8 +29,8 @@ a:hover {
 #nav-links > a > mat-icon {
   width: fit-content;
   height: fit-content;
-  margin-bottom: -4px;
-  font-size: 30px
+  margin-bottom: -6px;
+  font-size: 30px;
 }
 
 #screen-not-small-icons {
@@ -41,13 +41,13 @@ a:hover {
 
 button {
   margin-left: 40px;
+  scale: 1.5
 }
-button > mat-icon {
-  font-size: 35px;
+#screen-not-small-icons > button > mat-icon {
   color: rgb(88, 88, 88);
   width: fit-content;
   height: fit-content;
 }
-button:hover {
-  scale: 1.2;
+#screen-not-small-icons > button:hover {
+  scale: 1.7;
 }

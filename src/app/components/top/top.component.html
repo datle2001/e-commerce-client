@@ -1,6 +1,6 @@
 <div id="nav-bar">
   <div id="nav-links" *ngIf="!condenseNavLinks" >
-    <a routerLink="home">Home <mat-icon fontIcon="home" inline="true"/></a>
+    <a routerLink="home">Home <mat-icon fontIcon="home"/></a>
     <a routerLink="products">Products <mat-icon fontIcon="store"/></a>
     <a routerLink="support">Support <mat-icon fontIcon="help"/></a>
   </div>
@@ -11,7 +11,7 @@
     </button>
     
     <div *ngIf="!condenseIcons" id="screen-not-small-icons">
-      <button id="first-icon" mat-icon-button routerLink="cart">
+      <button mat-icon-button routerLink="cart">
         <mat-icon fontIcon="shopping_cart"
         matBadge="{{ cartServices.countProducts() }}"
         matBadgeHidden="{{ cartServices.selectedProducts.length == 0 }}"
@@ -19,19 +19,34 @@
       </button>
       
       <button mat-icon-button routerLink="user">
-        <mat-icon fontIcon="person_outline"/>
+        <mat-icon fontIcon="person_outline" inline="true"/>
       </button>
 
       <button mat-icon-button (click)="onAccountLogoClick()">
-        <mat-icon fontIcon="{{loginServices.hasLoggedIn() ? 'logout' : 'login'}}"></mat-icon>
+        <mat-icon fontIcon="{{loginServices.hasLoggedIn() ? 'logout' : 'login'}}" inline="true"/>
       </button>
     </div>
   </div>
 
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item>
-      <mat-icon>dialpad</mat-icon>
-      <span>Redial</span>
-    </button>
+  <mat-menu #menu="matMenu" style="color: gray;">
+    <div *ngIf="condenseNavLinks">
+      <a mat-menu-item routerLink="home">Home <mat-icon fontIcon="home"/></a>
+      <a mat-menu-item routerLink="products">Products <mat-icon fontIcon="store"/></a>
+      <a mat-menu-item routerLink="support">Support <mat-icon fontIcon="help"/></a>
+    </div>
+      <a mat-menu-item routerLink="cart">
+        <mat-icon fontIcon="shopping_cart"
+        matBadge="{{ cartServices.countProducts() }}"
+        matBadgeHidden="{{ cartServices.selectedProducts.length == 0 }}"
+          /> Cart
+      </a>
+      
+      <a mat-menu-item routerLink="user">
+        <mat-icon fontIcon="person_outline"/> User
+      </a>
+
+      <a mat-menu-item (click)="onAccountLogoClick()">
+        <mat-icon fontIcon="{{loginServices.hasLoggedIn() ? 'logout' : 'login'}}"></mat-icon> {{loginServices.hasLoggedIn() ? 'Logout' : 'Login'}}
+      </a>
   </mat-menu>
 </div>
