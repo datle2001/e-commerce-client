@@ -11,7 +11,7 @@ import { NgIf } from '@angular/common';
   templateUrl: './cart-product.component.html',
   styleUrls: ['./cart-product.component.css'],
   standalone: true,
-  imports: [QuantitySelectComponent, NgIf]
+  imports: [NgIf, QuantitySelectComponent]
 })
 export class CartProductComponent{
   @Input()

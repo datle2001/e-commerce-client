@@ -6,13 +6,13 @@ import { FormsModule } from '@angular/forms';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ProductBoxComponent } from './product-box/product-box.component';
 import { NgFor, NgIf } from '@angular/common';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   templateUrl: './products-page.component.html',
   styleUrls: ['./products-page.component.css'],
   standalone: true,
-  imports: [SpinnerComponent, FormsModule, MatGridListModule, ProductBoxComponent, NgIf, NgFor, MatFormFieldModule]
+  imports: [NgFor, NgIf, MatGridListModule, MatInputModule, ProductBoxComponent, SpinnerComponent, FormsModule]
 })
 export class ProductsPageComponent implements OnInit {
   constructor(private productServices: ProductServices) {}

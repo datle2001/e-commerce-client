@@ -4,9 +4,8 @@ import { Component } from '@angular/core';
   selector: 'app-support',
   templateUrl: './support-page.component.html',
   styleUrls: ['./support-page.component.css'],
-  standalone: true,
-  imports: []
+  standalone: true
 })
-export class SupportComponent {
+export class SupportPageComponent {
 
 }

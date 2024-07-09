@@ -16,7 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './product-detail-page.component.html',
   styleUrls: ['./product-detail-page.component.css'],
   standalone: true,
-  imports: [SpinnerComponent, MatDividerModule, QuantitySelectComponent, StarComponent, NgIf, MatButtonModule]
+  imports: [MatButtonModule, NgIf, StarComponent, QuantitySelectComponent, MatDividerModule, SpinnerComponent]
 })
 export class ProductDetailPageComponent implements OnInit {
   constructor(

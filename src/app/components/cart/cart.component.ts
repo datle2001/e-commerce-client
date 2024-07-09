@@ -17,7 +17,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
   standalone: true,
-  imports: [SpinnerComponent, NgIf, MatDividerModule, NgFor, CartProductComponent, MatButtonModule, RouterLink]
+  imports: [SpinnerComponent, NgFor, NgIf, MatDividerModule, CartProductComponent, MatButtonModule, RouterLink]
 })
 export class CartComponent {
   constructor(

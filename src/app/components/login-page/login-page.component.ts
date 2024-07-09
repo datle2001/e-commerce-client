@@ -19,14 +19,7 @@ import { MatNativeDateModule } from '@angular/material/core';
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.css', '../../../theme.scss'],
   standalone: true,
-  imports: [
-    MatButtonModule,
-    MatInputModule,
-    MatFormFieldModule,
-    SpinnerComponent,
-    FormsModule,
-    MatNativeDateModule,
-  ],
+  imports: [SpinnerComponent, MatFormFieldModule, FormsModule, MatInputModule, MatButtonModule]
 })
 export class LoginPageComponent {
   constructor(

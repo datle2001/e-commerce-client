@@ -15,7 +15,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
   templateUrl: './product-box.component.html',
   styleUrls: ['./product-box.component.css'],
   standalone: true,
-  imports: [MatDividerModule, QuantitySelectComponent, StarComponent, RouterLink, MatButtonModule],
+  imports: [MatButtonModule, RouterLink, StarComponent, QuantitySelectComponent, MatDividerModule]
 })
 export class ProductBoxComponent {
   constructor(

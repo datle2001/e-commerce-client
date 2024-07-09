@@ -11,7 +11,7 @@ import { ConfirmationProductComponent } from './confirmation-product/confirmatio
   templateUrl: './confirmation-page.component.html',
   styleUrls: ['./confirmation-page.component.css'],
   standalone: true,
-  imports: [SpinnerComponent, NgIf, NgFor, ConfirmationProductComponent]
+  imports: [SpinnerComponent, NgFor, NgIf, ConfirmationProductComponent]
 })
 export class ConfirmationPageComponent implements OnInit {
   constructor(

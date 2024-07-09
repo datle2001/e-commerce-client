@@ -1,17 +1,17 @@
-import { NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { TopComponent } from './components/top/top.component';
 import { CartServices } from './services/cart.service';
 import { LoginServices } from './services/login.service';
 import { LoginState } from './shared/enums';
+import { NgIf } from '@angular/common';
+import { TopComponent } from '@components/top/top.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   standalone: true,
-  imports: [TopComponent, RouterOutlet, NgIf],
+  imports: [NgIf, TopComponent, RouterOutlet]
 })
 export class AppComponent implements OnInit, OnDestroy {
   constructor(

@@ -4,16 +4,19 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'home-page-root',
+  selector: 'home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css'],
   standalone: true,
-  imports: [MatDividerModule, MatGridListModule]
+  imports: []
 })
 export class HomePageComponent implements OnInit {
   constructor() {}
 
   protected welcomePageImageLink = `${environment.googleStorageURL}/image-welcome-page/`;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(true);
+    
+  }
 }

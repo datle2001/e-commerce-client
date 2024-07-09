@@ -4,7 +4,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   selector: 'quant-select',
   templateUrl: './quantity-select.component.html',
   styleUrls: ['./quantity-select.component.css'],
-  standalone: true,
+  standalone: true
 })
 export class QuantitySelectComponent {
   @Input()
