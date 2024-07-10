@@ -49,5 +49,5 @@ button {
   height: fit-content;
 }
 #screen-not-small-icons > button:hover {
-  scale: 1.7;
+  scale: 1.6;
 }
