@@ -39,7 +39,7 @@ export class TopComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.breakpointObserver
-      .observe([Breakpoints.XSmall, Breakpoints.Small, Breakpoints.Medium])
+      .observe([Breakpoints.XSmall, Breakpoints.Small, Breakpoints.Medium, Breakpoints.Large, Breakpoints.XLarge])
       .pipe(takeUntil(this.destroyed))
       .subscribe((result) => {
         for (const query of Object.keys(result.breakpoints)) {
@@ -47,12 +47,16 @@ export class TopComponent implements OnInit, OnDestroy {
             switch (query) {
               case Breakpoints.XSmall:
                 this.condenseNavLinks = true;
+                this.condenseIcons = true;
                 break;
               case Breakpoints.Small:
                 this.condenseIcons = true;
                 this.condenseNavLinks = false;
                 break;
               case Breakpoints.Medium:
+              case Breakpoints.Large:
+              case Breakpoints.XLarge:
+                this.condenseNavLinks = false;
                 this.condenseIcons = false;
                 break;
               default:
