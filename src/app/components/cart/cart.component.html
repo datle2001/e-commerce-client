@@ -1,5 +1,11 @@
 <div class="route-container">
   <spinner [isDisplayed]="orderServices.isOrderSubmitting()"/>
+  
+  <h1 *ngIf="cartServices.selectedProducts.length == 0">
+    Your cart is empty. Click <a routerLink="/products">here</a> to go back to
+    Products page.
+  </h1>
+
   <div
     style="display: flex; align-items: flex-start"
     *ngIf="cartServices.selectedProducts.length > 0"
@@ -38,9 +44,4 @@
       </button>
     </div>
   </div>
-
-  <h1 *ngIf="cartServices.selectedProducts.length == 0">
-    Your cart is empty. Click <a routerLink="/products">here</a> to go back to
-    Products page.
-  </h1>
 </div>

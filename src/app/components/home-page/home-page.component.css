@@ -1,28 +1,24 @@
-img {
-  display: block;
-  height: 150px;
+.route-container {
+  background-image: url('../../../assets/background-image.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
-.tile-container {
+#intro {
+  margin: 100px auto;
   text-align: center;
 }
 h1 {
-  margin-top: 30px;
   font-size: 40px;
-  text-align: center;
-  font-weight: 400;
-  color: rgb(121, 121, 121);
-  margin-bottom: 50px;
-  text-decoration: underline;
+  font-weight: 100;
+  color: rgb(55, 235, 0);
+  line-height: 1.5em;
 }
-.route-container {
-  padding: 50px;
+h1 > img {
+  display: inline;
+  width: 50px
 }
-
-h2 {
-  margin-top: 30px;
-}
-
-mat-divider {
-  margin-top: 70px;
-  border: 0.5px rgb(128, 128, 128, 0.5) solid;
+button {
+  margin: 0 20px;
+  color: gray
 }
