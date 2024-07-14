@@ -1,4 +1,8 @@
+import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { RouterLink } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { CartServices } from 'src/app/services/cart.service';
 import { LoginServices } from 'src/app/services/login.service';
@@ -7,17 +11,21 @@ import { ToastServices } from 'src/app/services/toast.service';
 import { OrderState, ToastType } from 'src/app/shared/enums';
 import { redirectTo } from 'src/app/shared/helpers';
 import { SpinnerComponent } from '../shared/spinner/spinner.component';
-import { NgFor, NgIf } from '@angular/common';
-import { MatDividerModule } from '@angular/material/divider';
 import { CartProductComponent } from './cart-product/cart-product.component';
-import { MatButtonModule } from '@angular/material/button';
-import { RouterLink } from '@angular/router';
 
 @Component({
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
   standalone: true,
-  imports: [SpinnerComponent, NgFor, NgIf, MatDividerModule, CartProductComponent, MatButtonModule, RouterLink]
+  imports: [
+    SpinnerComponent,
+    NgFor,
+    NgIf,
+    MatDividerModule,
+    CartProductComponent,
+    MatButtonModule,
+    RouterLink,
+  ],
 })
 export class CartComponent {
   constructor(
@@ -48,28 +56,29 @@ export class CartComponent {
       this.orderServices.setOrderState(OrderState.SUBMITTING);
 
       this.orderServices.createOrder().subscribe({
-        next: ({url}) => {          
+        next: ({ url }) => {
           this.orderServices.setOrderState(OrderState.SUBMITTED);
 
-          this.toastServices.showToast(
-            'Thank you for placing an order with us!',
-            ToastType.SUCCESS,
-          ).onHidden.subscribe({
-            next: () => {
-              redirectTo(url);
-            }
-          });
+          this.toastServices
+            .showToast(
+              'Thank you for placing an order with us!',
+              ToastType.SUCCESS
+            )
+            .onHidden.subscribe({
+              next: () => {
+                redirectTo(url);
+              },
+            });
         },
         error: (error) => {
           this.orderServices.setOrderState(OrderState.NOT_SUBMIITED);
           console.log(error);
         },
       });
-    } 
-    else {
+    } else {
       this.toastServices.showToast(
         'You need to login to place orders.',
-        ToastType.WARNING,
+        ToastType.WARNING
       );
     }
   }

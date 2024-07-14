@@ -7,7 +7,7 @@
 
   <div *ngIf="products.length > 0">
     <div id="above-list">
-      <h2>{{ filteredProducts.length }} RESULTS</h2>
+      <h2>{{ products.length }} RESULTS</h2>
       
       <label>Filter:
         <input matInput type="text" [(ngModel)]="nameFilter" name="filter"/> 
@@ -15,11 +15,19 @@
     </div>
 
     <mat-grid-list [cols]="cols" rowHeight="580px">
-      <ng-container *ngFor="let product of filteredProducts">
+      <ng-container *ngFor="let product of products">
         <mat-grid-tile>
           <pb-root [product]="product" />
         </mat-grid-tile>
       </ng-container>
     </mat-grid-list>
+
+    <mat-paginator [length]="30"
+              [pageSize]="productServices.pageSize"
+              hidePageSize="true"
+              aria-label="Select page"
+              (page)="onPageChange($event)">
+    </mat-paginator>
+    
   </div>
 </div>

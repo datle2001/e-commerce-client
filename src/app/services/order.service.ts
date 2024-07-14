@@ -39,7 +39,7 @@ export class OrderServices {
    */
   createOrder(): Observable<any> {
     console.log(this.cartServices.selectedProducts);
-    
+
     return this.http.post(this.orderUrl, this.cartServices.selectedProducts, {
       headers: this.loginServices.getHeaders(),
     });
@@ -49,14 +49,13 @@ export class OrderServices {
     let order = new Order();
 
     rawOrder.forEach((rawOrderedProduct) => {
-      let product = this.productServices.initProductFrom(
-        rawOrderedProduct.product
-      );
-      let orderedProduct = new OrderedProduct(
+      let product = { ...rawOrderedProduct.product };
+        
+      let orderedProduct: OrderedProduct = {
         product,
-        rawOrderedProduct.can_fulfill,
-        rawOrderedProduct.ordered_quantity
-      );
+        canFulfill: rawOrderedProduct.can_fulfill,
+        quantity: rawOrderedProduct.ordered_quantity
+      };
 
       order.orderedProducts.push(orderedProduct);
     });

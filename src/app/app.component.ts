@@ -1,17 +1,17 @@
+import { NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
+import { TopComponent } from '@components/top/top.component';
 import { CartServices } from './services/cart.service';
 import { LoginServices } from './services/login.service';
 import { LoginState } from './shared/enums';
-import { NgIf } from '@angular/common';
-import { TopComponent } from '@components/top/top.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   standalone: true,
-  imports: [NgIf, TopComponent, RouterOutlet]
+  imports: [NgIf, TopComponent, RouterOutlet],
 })
 export class AppComponent implements OnInit, OnDestroy {
   constructor(
@@ -25,7 +25,7 @@ export class AppComponent implements OnInit, OnDestroy {
     if (this.loginServices.hasToken()) {
       this.loginServices.loginWithToken().subscribe({
         next: ({ token, user }) => {
-          this.loginServices.setLoginState(LoginState.LOGGED_IN);
+          this.loginServices.loginState = LoginState.LOGGED_IN;
           this.loginServices.setToken(token);
           this.cartServices.getSelectedProductsFromLocalStorage();
         },
@@ -37,7 +37,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.loginServices.setLoginState(LoginState.NOT_LOGGED_IN);
+    this.loginServices.loginState = LoginState.NOT_LOGGED_IN;
     this.loginServices.setToken('');
   }
 

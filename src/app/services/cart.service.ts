@@ -77,7 +77,7 @@ export class CartServices {
    */
   removeProduct(productId: string): void {
     const changedSelectedProducts = this.selectedProducts.filter(
-      (sp: SelectedProduct) => sp.product.id !== productId
+      (sp: SelectedProduct) => sp.product.id! !== productId
     );
 
     this.onSelectedProductChange.next(changedSelectedProducts);
@@ -106,7 +106,7 @@ export class CartServices {
    */
   getSubtotal(): number {
     return this.selectedProducts.reduce(
-      (sum, sp) => sum + sp.product.price * sp.quantity,
+      (sum, sp) => sum + sp.product.price! * sp.quantity,
       0
     );
   }

@@ -2,7 +2,9 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { Router, RouterLink } from '@angular/router';
 import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 import { Subject } from 'rxjs/internal/Subject';
@@ -11,16 +13,20 @@ import { LoginServices } from 'src/app/services/login.service';
 import { ToastServices } from 'src/app/services/toast.service';
 import { LoginState, ToastType } from 'src/app/shared/enums';
 import { environment } from 'src/environments/environment';
-import { MatMenuModule } from "@angular/material/menu";
-import { MatButtonModule } from '@angular/material/button';
-
 
 @Component({
   selector: 'top-root',
   templateUrl: './top.component.html',
   styleUrls: ['./top.component.css'],
   standalone: true,
-  imports: [MatIconModule, NgIf, MatBadgeModule, MatMenuModule, MatButtonModule, RouterLink],
+  imports: [
+    MatIconModule,
+    NgIf,
+    MatBadgeModule,
+    MatMenuModule,
+    MatButtonModule,
+    RouterLink,
+  ],
 })
 export class TopComponent implements OnInit, OnDestroy {
   constructor(
@@ -39,7 +45,13 @@ export class TopComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.breakpointObserver
-      .observe([Breakpoints.XSmall, Breakpoints.Small, Breakpoints.Medium, Breakpoints.Large, Breakpoints.XLarge])
+      .observe([
+        Breakpoints.XSmall,
+        Breakpoints.Small,
+        Breakpoints.Medium,
+        Breakpoints.Large,
+        Breakpoints.XLarge,
+      ])
       .pipe(takeUntil(this.destroyed))
       .subscribe((result) => {
         for (const query of Object.keys(result.breakpoints)) {
@@ -76,7 +88,7 @@ export class TopComponent implements OnInit, OnDestroy {
             'You have successfully logged out',
             ToastType.SUCCESS
           );
-          this.loginServices.setLoginState(LoginState.NOT_LOGGED_IN);
+          this.loginServices.loginState = LoginState.NOT_LOGGED_IN;
         },
         error: (error) => {
           console.log(error);

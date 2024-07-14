@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoginInfo } from '../models/loginInfo';
 import { LoginState } from '../shared/enums';
@@ -13,7 +13,11 @@ export class LoginServices {
   public loginInfo: LoginInfo = new LoginInfo('', '');
   private bearerToken: string = '';
   private TOKEN_KEY: string = 'token';
-  private loginState: LoginState = LoginState.NOT_LOGGED_IN;
+
+  private readonly _loginState = new BehaviorSubject<LoginState>(
+    LoginState.NOT_LOGGED_IN
+  );
+  readonly loginState$ = this._loginState.asObservable();
 
   public login(): Observable<any> {
     const loginUrl = `${environment.api.url}/login`;
@@ -68,19 +72,19 @@ export class LoginServices {
     };
   }
 
-  public setLoginState(loginState: LoginState): void {
-    this.loginState = loginState;
+  set loginState(loginState: LoginState) {
+    this._loginState.next(loginState);
   }
 
-  public getLoginState(): LoginState {
-    return this.loginState;
+  get loginState(): LoginState {
+    return this._loginState.getValue();
   }
 
   public hasLoggedIn(): boolean {
-    return this.getLoginState() == LoginState.LOGGED_IN;
+    return this.loginState == LoginState.LOGGED_IN;
   }
 
   public isLoggingIn(): boolean {
-    return this.getLoginState() == LoginState.LOGGING_IN;
+    return this.loginState == LoginState.LOGGING_IN;
   }
 }

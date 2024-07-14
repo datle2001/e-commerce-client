@@ -1,9 +1,11 @@
 #product-detail-page-container {
   display: flex;
+  font-weight: 200;
+  padding-top: 20px;
 }
 h1 {
   font-size: 45px;
-  font-weight: 600px;
+  font-weight: 300;
 }
 img {
   width: 500px;

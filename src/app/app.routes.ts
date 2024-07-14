@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import { ProductsPageComponent } from '@components/products-page/products-page.component';
-import { SupportPageComponent } from '@components/support-page/support-page.component';
 
 export const routes: Routes = [
   {
@@ -8,11 +6,10 @@ export const routes: Routes = [
     loadComponent: () =>
       import('@components/products-page/products-page.component').then(
         (m) => m.ProductsPageComponent
-      ),
+      )
   },
   {
     path: 'products/:id',
-    // component: ProductDetailPageComponent,
     loadComponent: () =>
       import(
         '@components/product-detail-page/product-detail-page.component'
@@ -20,7 +17,6 @@ export const routes: Routes = [
   },
   {
     path: 'cart',
-    // component: CartComponent,
     loadComponent: () =>
       import('@components/cart/cart.component').then((m) => m.CartComponent),
   },
@@ -33,7 +29,6 @@ export const routes: Routes = [
   },
   {
     path: 'confirmation/:id',
-    // component: ConfirmationPageComponent,
     loadComponent: () =>
       import('@components/confirmation-page/confirmation-page.component').then(
         (m) => m.ConfirmationPageComponent
@@ -45,7 +40,6 @@ export const routes: Routes = [
       import('@components/login-page/login-page.component').then(
         (m) => m.LoginPageComponent
       ),
-    // component: LoginPageComponent,
   },
   {
     path: 'user',
@@ -56,7 +50,6 @@ export const routes: Routes = [
   },
   {
     path: 'home',
-    // component: HomePageComponent,
     loadComponent: () =>
       import('@components/home-page/home-page.component').then(
         (m) => m.HomePageComponent
