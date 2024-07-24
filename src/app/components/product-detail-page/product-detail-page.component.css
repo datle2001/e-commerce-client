@@ -19,3 +19,6 @@ p {
   font-size: 18px;
   font-weight: 200px;
 }
+#description {
+  line-height: 1.5em;
+}

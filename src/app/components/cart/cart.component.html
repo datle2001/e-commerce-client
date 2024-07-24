@@ -1,6 +1,4 @@
-<div class="route-container">
-  <spinner [isDisplayed]="orderServices.isOrderSubmitting()"/>
-  
+<div class="route-container">  
   <h1 *ngIf="cartServices.selectedProducts.length == 0">
     Your cart is empty. Click <a routerLink="/products">here</a> to go back to
     Products page.
@@ -19,10 +17,7 @@
       </h1>
       <mat-divider />
       <div *ngFor="let sp of cartServices.selectedProducts">
-        <cart-product
-          [selectedProduct]="sp"
-          (onRemove)="onRemoveClick($event)"
-        />
+        <cart-product [selectedProduct]="sp"/>
       </div>
     </div>
     <div id="os-container">

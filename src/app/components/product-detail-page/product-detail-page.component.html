@@ -1,6 +1,4 @@
 <div class="route-container">
-  <spinner [isDisplayed]="!product"/>
-
   <div *ngIf="product" id="product-detail-page-container">
     <img src="{{ product.photoUrl }}" />
 
@@ -33,7 +31,7 @@
 
       <mat-divider /><br />
 
-      <p>{{ product.description }}</p>
+      <p id="description">{{ product.description }}</p>
     </div>
   </div>
 </div>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActiveToast, ToastrService } from 'ngx-toastr';
 import { ToastType } from '../shared/enums';
+import { Observable, take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ export class ToastServices {
    * Show popup with *message*
    * @param message
    */
-  showToast(message: string, toastType: ToastType): ActiveToast<any> {
+  showToast(message: string, toastType: ToastType): Observable<any> {
     let activeToast: ActiveToast<any>;
 
     switch (toastType) {
@@ -27,6 +28,6 @@ export class ToastServices {
         break;
     }
 
-    return activeToast;
+    return activeToast.onHidden.pipe(take(1));
   }
 }

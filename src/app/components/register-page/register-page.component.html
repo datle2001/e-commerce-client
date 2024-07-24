@@ -1,0 +1,42 @@
+<div>
+  <form [formGroup]="registerFormGroup">
+    <h1>Sign Up</h1>
+    <mat-form-field>
+      <mat-label>First name</mat-label>
+      <input matInput formControlName="firstName"/>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Last name</mat-label>
+      <input matInput formControlName="lastName"/>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Sex</mat-label>
+      <mat-select formControlName="sex">
+        <mat-option value="M">Male</mat-option>
+        <mat-option value="F">Female</mat-option>
+        <mat-option value="N/A">I don't want to share</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Date of birth</mat-label>
+      <input matInput [matDatepicker]="DOBpicker" formControlName="dob"/>
+      <mat-datepicker-toggle matIconSuffix [for]="DOBpicker"/>
+      <mat-datepicker #DOBpicker/>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email"/>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" type="password"/>
+    </mat-form-field>
+    
+    <button mat-raised-button type="button" [disabled]="registerFormGroup.invalid" (click)="onSignupButtonClick()">Sign up!</button>
+  </form>
+</div>

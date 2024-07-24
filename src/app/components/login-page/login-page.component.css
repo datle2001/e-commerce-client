@@ -2,7 +2,14 @@ form {
   margin: auto;
   margin-top: 20vh;
   width: fit-content;
-  padding: 20px;
+  padding: 40px;
+  border: rgb(70, 184, 25) solid;
+}
+
+h1 {
+  margin-bottom: 40px;
+  font-size: 35px;
+  font-weight: 200;
 }
 
 .center {
@@ -18,4 +25,13 @@ mat-form-field {
 }
 .route-container {
   background-color: white;
+}
+
+form > p {
+  margin-top: 40px;
+  font-size: 16px;
+}
+
+form > p > a:hover {
+  text-decoration: underline;
 }

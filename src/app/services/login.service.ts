@@ -1,75 +1,72 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { LoginInfo } from '../models/loginInfo';
+import { LoginInfo } from '../models/login-info';
 import { LoginState } from '../shared/enums';
+import { SpinnerService } from './spinner.service';
+import { LocalStorageService } from './local-storage.service';
+import { Token } from '../models/token';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginServices {
-  constructor(private http: HttpClient) {}
-  public loginInfo: LoginInfo = new LoginInfo('', '');
-  private bearerToken: string = '';
-  private TOKEN_KEY: string = 'token';
+  constructor(
+    private http: HttpClient,
+    private localStorageService: LocalStorageService
+  ) {}
 
   private readonly _loginState = new BehaviorSubject<LoginState>(
     LoginState.NOT_LOGGED_IN
   );
-  readonly loginState$ = this._loginState.asObservable();
 
-  public login(): Observable<any> {
-    const loginUrl = `${environment.api.url}/login`;
-    return this.http.post(loginUrl, this.loginInfo);
+  public signup(signupInfo: User): Observable<Token> {
+    const signupUrl = `${environment.api.url}/signup`;
+
+    return this.http.post<Token>(signupUrl, signupInfo).pipe(take(1));
   }
 
-  public loginWithToken(): Observable<any> {
+  public login(loginInfo: LoginInfo): Observable<Token> {
+    const loginUrl = `${environment.api.url}/login`;
+
+    return this.http.post<Token>(loginUrl, loginInfo).pipe(take(1));
+  }
+
+  public loginWithToken(): Observable<Token> {
     const loginWithTokenUrl = `${environment.api.url}/loginWithToken`;
-    return this.http.post(
-      loginWithTokenUrl,
-      {},
-      {
-        headers: this.getHeaders(),
-      }
-    );
+
+    return this.http
+      .post<Token>(
+        loginWithTokenUrl,
+        {},
+        {
+          headers: this.getHeaders(),
+        }
+      )
+      .pipe(take(1));
   }
 
   public logout(): Observable<any> {
     const logoutUrl = `${environment.api.url}/logout`;
 
-    return this.http.post(
-      logoutUrl,
-      {},
-      {
-        headers: this.getHeaders(),
-      }
-    );
+    return this.http
+      .post(
+        logoutUrl,
+        {},
+        {
+          headers: this.getHeaders(),
+        }
+      )
+      .pipe(take(1));
   }
 
-  public hasToken(): boolean {
-    return (
-      this.bearerToken != '' || localStorage.getItem(this.TOKEN_KEY) != null
-    );
-  }
-
-  public setToken(token: string) {
-    localStorage.setItem(this.TOKEN_KEY, token);
-  }
-
-  public deleteToken(): void {
-    localStorage.removeItem(this.TOKEN_KEY);
-  }
-
-  public getHeaders(): any {
-    if (this.bearerToken == '') {
-      this.bearerToken = localStorage.getItem('token')!;
-    }
-
-    return {
+  public getHeaders(): HttpHeaders {
+    return new HttpHeaders({
       'Content-type': 'application/json',
-      Authorization: this.bearerToken,
-    };
+      Authorization: this.localStorageService.getToken()!.token,
+    });
   }
 
   set loginState(loginState: LoginState) {
@@ -86,5 +83,16 @@ export class LoginServices {
 
   public isLoggingIn(): boolean {
     return this.loginState == LoginState.LOGGING_IN;
+  }
+
+  public loginUser(token: Token) {
+    this.loginState = LoginState.LOGGED_IN;
+    this.localStorageService.setToken(token);
+  }
+
+  // Clean up after successful logout
+  public logoutUser() {
+    this.loginState = LoginState.NOT_LOGGED_IN;
+    this.localStorageService.deleteToken();
   }
 }

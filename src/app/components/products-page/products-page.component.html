@@ -3,9 +3,8 @@
   SORT BY 
   <mat-select></mat-select>
 </label>-->
-  <spinner [isDisplayed]="products.length == 0"/>
 
-  <div *ngIf="products.length > 0">
+  <div *ngIf="products">
     <div id="above-list">
       <h2>{{ products.length }} RESULTS</h2>
       
@@ -23,10 +22,11 @@
     </mat-grid-list>
 
     <mat-paginator [length]="30"
-              [pageSize]="productServices.pageSize"
+              [pageSize]="pageSize"
               hidePageSize="true"
               aria-label="Select page"
-              (page)="onPageChange($event)">
+              pageIndex="{{pageIndex}}"
+              (page)="pageIndex = $event.pageIndex">
     </mat-paginator>
     
   </div>

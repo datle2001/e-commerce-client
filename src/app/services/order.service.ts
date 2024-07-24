@@ -4,19 +4,19 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Order, OrderedProduct } from '../models/order';
 import { OrderState } from '../shared/enums';
-import { CartServices } from './cart.service';
+import { CartService } from './cart.service';
 import { LoginServices } from './login.service';
-import { ProductServices } from './product.service';
+import { SpinnerService } from './spinner.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderServices {
   constructor(
-    private cartServices: CartServices,
+    private cartServices: CartService,
     private http: HttpClient,
-    private productServices: ProductServices,
-    private loginServices: LoginServices
+    private loginServices: LoginServices,
+    private spinnerService: SpinnerService
   ) {}
 
   private orderUrl = `${environment.api.url}/orders`;
@@ -28,9 +28,15 @@ export class OrderServices {
    * @returns
    */
   getOrderById(orderId: string): Observable<any> {
-    return this.http.get<any>(`${this.orderUrl}/${orderId}`, {
-      headers: this.loginServices.getHeaders(),
-    });
+    this.spinnerService.show = true;
+    return this.http
+      .get<any>(`${this.orderUrl}/${orderId}`, {
+        headers: this.loginServices.getHeaders(),
+      })
+      .pipe((m) => {
+        this.spinnerService.show = false;
+        return m;
+      });
   }
 
   /**
@@ -38,11 +44,16 @@ export class OrderServices {
    * @returns
    */
   createOrder(): Observable<any> {
-    console.log(this.cartServices.selectedProducts);
+    this.spinnerService.show = true;
 
-    return this.http.post(this.orderUrl, this.cartServices.selectedProducts, {
-      headers: this.loginServices.getHeaders(),
-    });
+    return this.http
+      .post(this.orderUrl, this.cartServices.selectedProducts, {
+        headers: this.loginServices.getHeaders(),
+      })
+      .pipe((m) => {
+        this.spinnerService.show = false;
+        return m;
+      });
   }
 
   initOrderFrom(rawOrder: any[]): Order {
@@ -50,11 +61,11 @@ export class OrderServices {
 
     rawOrder.forEach((rawOrderedProduct) => {
       let product = { ...rawOrderedProduct.product };
-        
+
       let orderedProduct: OrderedProduct = {
         product,
         canFulfill: rawOrderedProduct.can_fulfill,
-        quantity: rawOrderedProduct.ordered_quantity
+        quantity: rawOrderedProduct.ordered_quantity,
       };
 
       order.orderedProducts.push(orderedProduct);

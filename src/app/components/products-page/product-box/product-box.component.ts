@@ -3,7 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterLink } from '@angular/router';
 import { Product } from 'src/app/models/product';
-import { CartServices } from 'src/app/services/cart.service';
+import { CartService } from 'src/app/services/cart.service';
 import { ToastServices } from 'src/app/services/toast.service';
 import { ToastType } from 'src/app/shared/enums';
 import { QuantitySelectComponent } from '../../shared/quantity-select/quantity-select.component';
@@ -22,9 +22,9 @@ import { StarComponent } from '../../shared/star/star.component';
     MatDividerModule,
   ],
 })
-export class ProductBoxComponent{
+export class ProductBoxComponent {
   constructor(
-    private cartService: CartServices,
+    private cartService: CartService,
     private toastService: ToastServices
   ) {}
 
@@ -35,7 +35,7 @@ export class ProductBoxComponent{
   /**
    * Triggers on Add button clicked
    */
-  onAddClick(): void {  
+  onAddClick(): void {
     this.cartService.addProduct({
       product: this.product,
       quantity: this.quantity,

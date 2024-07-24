@@ -1,16 +1,23 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import '@angular/forms';
-import { FormControl, FormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { LoginInfo } from 'src/app/models/loginInfo';
+import { Router, RouterLink } from '@angular/router';
+import { Subject, take, takeUntil } from 'rxjs';
 import { LoginServices } from 'src/app/services/login.service';
 import { ToastServices } from 'src/app/services/toast.service';
 import { LoginState, ToastType } from 'src/app/shared/enums';
 import { SpinnerComponent } from '../shared/spinner/spinner.component';
+import { SpinnerService } from 'src/app/services/spinner.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'login-page',
@@ -23,46 +30,60 @@ import { SpinnerComponent } from '../shared/spinner/spinner.component';
     FormsModule,
     MatInputModule,
     MatButtonModule,
+    ReactiveFormsModule,
+    RouterLink
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginPageComponent {
+export class LoginPageComponent implements OnDestroy {
+  private destroyed = new Subject<void>();
+  protected readonly loginFormGroup = new FormGroup({
+    email: new FormControl<string>('', [Validators.required, Validators.email]),
+    password: new FormControl<string>('', [Validators.required]),
+  });
+
   constructor(
     protected loginServices: LoginServices,
     private router: Router,
-    private toastServices: ToastServices
-  ) {}
-
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
-
-  loginInfo: LoginInfo = this.loginServices.loginInfo;
+    private toastServices: ToastServices,
+    private spinnerService: SpinnerService  ) {}
 
   protected onSubmit() {
-    this.loginServices.loginState = LoginState.LOGGING_IN;
-    this.handleLoginObservable(this.loginServices.login());
+    this.spinnerService.show = true;
+    this.loginServices
+      .login({
+        email: this.loginFormGroup.controls.email.value!,
+        password: this.loginFormGroup.controls.password.value!,
+      })
+      .subscribe({
+        next: (token) => {
+          this.spinnerService.show = false;
+          this.loginServices.loginUser(token);
+          this.toastServices
+            .showToast('You have logged in successfully', ToastType.SUCCESS)
+            .subscribe({
+              next: () => {
+                this.router.navigate(['/']);
+              }
+            });
+        },
+        error: ({ headers, error }) => {
+          this.spinnerService.show = false;
+          
+          if (error.message === 'Invalid Credentials') {
+            this.toastServices.showToast(
+              'We cannot find your credentials',
+              ToastType.ERROR
+            );
+          }
+
+          console.error(error);
+        },
+      });
   }
 
-  private handleLoginObservable(observable: Observable<any>): void {
-    observable.subscribe({
-      next: ({ token, user }) => {
-        this.loginServices.loginState = LoginState.LOGGED_IN;
-        this.loginServices.setToken(token);
-        this.router.navigate(['/']);
-      },
-      error: ({ headers, error }) => {
-        this.loginServices.loginState = LoginState.NOT_LOGGED_IN;
-
-        if (error.message === 'Invalid Credentials') {
-          this.toastServices.showToast(
-            'We cannot find your credentials',
-            ToastType.ERROR
-          );
-        }
-
-        console.log(error);
-      },
-    });
+  ngOnDestroy(): void {
+    this.destroyed.next();
+    this.destroyed.complete();
   }
 }

@@ -1,10 +1,11 @@
 import { NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
 import { Product } from 'src/app/models/product';
-import { CartServices } from 'src/app/services/cart.service';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductServices } from 'src/app/services/product.service';
 import { ToastServices } from 'src/app/services/toast.service';
 import { ToastType } from 'src/app/shared/enums';
@@ -29,10 +30,10 @@ export class ProductDetailPageComponent {
   constructor(
     private route: ActivatedRoute,
     private productServices: ProductServices,
-    private cartServices: CartServices,
+    private cartServices: CartService,
     private toastServices: ToastServices
   ) {
-    this.getProduct()
+    this.getProduct();
   }
 
   protected product: Product | undefined;
@@ -40,15 +41,16 @@ export class ProductDetailPageComponent {
   protected quantity: number = 1;
 
   private getProduct() {
-    this.productServices.getProductById(this.id).subscribe({
-      next: (product) => {
-        this.product = product;
-        this.productServices.updatePhotoUrl(this.product);
-      },
-      error: (error) => {
-        console.error(error);
-      },
-    });
+    this.productServices
+      .getProductsById(this.id)
+      .subscribe({
+        next: (product) => {
+          this.product = product;
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      });
   }
 
   protected setQuantitySelect(quantitySelect: number) {

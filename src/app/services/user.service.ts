@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, take } from "rxjs";
 import { environment } from "src/environments/environment";
 import { LoginServices } from "./login.service";
 import { User } from "../models/user";
@@ -17,6 +17,6 @@ export class UserServices {
   getUser(): Observable<User> {
     return this.http.get<User>(this.USER_URL, {
       headers: this.loginServices.getHeaders(),
-    });
+    }).pipe(take(1));
   }
 }

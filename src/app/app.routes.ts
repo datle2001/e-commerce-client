@@ -55,6 +55,13 @@ export const routes: Routes = [
         (m) => m.HomePageComponent
       ),
   },
+  {
+    path: 'register',
+    loadComponent: () => 
+      import("@components/register-page/register-page.component").then(
+        (m) => m.RegisterPageComponent
+      ),
+  },
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { 
     path: '**', 

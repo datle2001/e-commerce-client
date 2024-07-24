@@ -1,21 +1,21 @@
 <div class="login-page">
-  <spinner [isDisplayed]="loginServices.isLoggingIn()" />
-
-  <form (ngSubmit)="onSubmit()">
+  <form (ngSubmit)="onSubmit()" [formGroup]="loginFormGroup">
+    <h1>Login</h1>
     <mat-form-field>
       <mat-label>Email</mat-label>
-      <input matInput type="email" [(ngModel)]="loginInfo.email" name="email" matNativeControl />
+      <input
+        matInput
+        formControlName="email"
+      />
     </mat-form-field>
-
     <br />
 
     <mat-form-field>
       <mat-label>Password</mat-label>
       <input
         matInput
+        formControlName="password"
         type="password"
-        [(ngModel)]="loginInfo.password"
-        name="password"
       />
     </mat-form-field>
 
@@ -26,10 +26,15 @@
         mat-raised-button
         appearance="fill"
         type="submit"
-        [disabled]="!loginInfo.isReadyToSubmit() || loginServices.isLoggingIn()"
+        [disabled]="loginFormGroup.invalid || loginServices.isLoggingIn()"
       >
         Login
       </button>
     </div>
+
+    <p>
+      Don't have an account yet? 
+      <a routerLink="/register"><i>Register here!</i></a>
+    </p>
   </form>
 </div>

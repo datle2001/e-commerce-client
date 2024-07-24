@@ -3,8 +3,7 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterLink } from '@angular/router';
-import { Product } from 'src/app/models/product';
-import { CartServices } from 'src/app/services/cart.service';
+import { CartService } from 'src/app/services/cart.service';
 import { LoginServices } from 'src/app/services/login.service';
 import { OrderServices } from 'src/app/services/order.service';
 import { ToastServices } from 'src/app/services/toast.service';
@@ -29,32 +28,17 @@ import { CartProductComponent } from './cart-product/cart-product.component';
 })
 export class CartComponent {
   constructor(
-    protected cartServices: CartServices,
+    protected cartServices: CartService,
     private toastServices: ToastServices,
     protected orderServices: OrderServices,
     private loginServices: LoginServices
   ) {}
 
   /**
-   * Triggers upon trash icon being clicked
-   * @param product
-   */
-  protected onRemoveClick(product: Product): void {
-    this.cartServices.removeProduct(product.id);
-
-    this.toastServices.showToast(
-      `${product.name} removed from your cart`,
-      ToastType.SUCCESS
-    );
-  }
-
-  /**
    * Triggers on Checkout button being clicked
    */
   protected onCheckoutClick(): void {
     if (this.loginServices.hasLoggedIn()) {
-      this.orderServices.setOrderState(OrderState.SUBMITTING);
-
       this.orderServices.createOrder().subscribe({
         next: ({ url }) => {
           this.orderServices.setOrderState(OrderState.SUBMITTED);
@@ -64,7 +48,7 @@ export class CartComponent {
               'Thank you for placing an order with us!',
               ToastType.SUCCESS
             )
-            .onHidden.subscribe({
+            .subscribe({
               next: () => {
                 redirectTo(url);
               },

@@ -12,10 +12,6 @@ import { environment } from 'src/environments/environment';
   standalone: true,
   imports: [MatButtonModule, RouterLink]
 })
-export class HomePageComponent implements OnInit {
-  constructor() {}
-
+export class HomePageComponent {
   protected welcomePageImageLink = `${environment.googleStorageURL}/image-welcome-page/`;
-
-  ngOnInit(): void {}
 }

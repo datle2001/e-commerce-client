@@ -8,7 +8,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { Router, RouterLink } from '@angular/router';
 import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 import { Subject } from 'rxjs/internal/Subject';
-import { CartServices } from 'src/app/services/cart.service';
+import { CartService } from 'src/app/services/cart.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { LoginServices } from 'src/app/services/login.service';
 import { ToastServices } from 'src/app/services/toast.service';
 import { LoginState, ToastType } from 'src/app/shared/enums';
@@ -29,19 +30,18 @@ import { environment } from 'src/environments/environment';
   ],
 })
 export class TopComponent implements OnInit, OnDestroy {
-  constructor(
-    protected cartServices: CartServices,
-    protected loginServices: LoginServices,
-    private router: Router,
-    private toastServices: ToastServices,
-    private breakpointObserver: BreakpointObserver
-  ) {}
-
-  destroyed = new Subject<void>();
+  private destroyed = new Subject<void>();
   protected headerImageLink = `${environment.googleStorageURL}/image-header/`;
   protected condenseIcons: boolean = false;
   protected condenseNavLinks: boolean = false;
-  protected numProducts: number | undefined;
+  protected numProducts: number = 0;
+
+  constructor(
+    protected cartServices: CartService,
+    protected loginServices: LoginServices,
+    private router: Router,
+    private toastServices: ToastServices,
+    private breakpointObserver: BreakpointObserver  ) {}
 
   ngOnInit(): void {
     this.breakpointObserver
@@ -77,25 +77,37 @@ export class TopComponent implements OnInit, OnDestroy {
           }
         }
       });
+
+    this.cartServices.selectedProducts$.pipe(takeUntil(this.destroyed)).subscribe({
+      next: () => {
+        this.numProducts = this.cartServices.countProducts();
+      }
+    });
   }
 
   protected onAccountLogoClick() {
     if (this.loginServices.hasLoggedIn()) {
       this.loginServices.logout().subscribe({
         next: () => {
-          this.loginServices.deleteToken();
           this.toastServices.showToast(
             'You have successfully logged out',
             ToastType.SUCCESS
           );
-          this.loginServices.loginState = LoginState.NOT_LOGGED_IN;
+          this.loginServices.logoutUser();
         },
         error: (error) => {
-          console.log(error);
+          console.error(error);
         },
       });
     } else {
-      this.router.navigate(['/login']);
+      this.toastServices
+        .showToast('Redirecting you to Login page', ToastType.WARNING)
+        .subscribe({
+          next: () => {
+            this.router.navigate(['/login']);
+          }
+        });
+      
     }
   }
 

@@ -2,7 +2,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Order } from 'src/app/models/order';
-import { CartServices } from 'src/app/services/cart.service';
+import { CartService } from 'src/app/services/cart.service';
 import { OrderServices } from 'src/app/services/order.service';
 import { SpinnerComponent } from '../shared/spinner/spinner.component';
 import { ConfirmationProductComponent } from './confirmation-product/confirmation-product.component';
@@ -15,7 +15,7 @@ import { ConfirmationProductComponent } from './confirmation-product/confirmatio
 })
 export class ConfirmationPageComponent implements OnInit {
   constructor(
-    private cartServices: CartServices,
+    private cartServices: CartService,
     protected orderServices: OrderServices,
     private route: ActivatedRoute
   ) {}
