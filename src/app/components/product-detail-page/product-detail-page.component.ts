@@ -1,9 +1,8 @@
 import { NgIf } from '@angular/common';
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductServices } from 'src/app/services/product.service';
@@ -41,20 +40,18 @@ export class ProductDetailPageComponent {
   protected quantity: number = 1;
 
   private getProduct() {
-    this.productServices
-      .getProductsById(this.id)
-      .subscribe({
-        next: (product) => {
-          this.product = product;
-        },
-        error: (error) => {
-          console.error(error);
-        },
-      });
+    this.productServices.getProductById(this.id).subscribe({
+      next: (product) => {
+        this.product = product;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
   }
 
-  protected setQuantitySelect(quantitySelect: number) {
-    this.quantity = quantitySelect;
+  protected setQuantitySelect(change: number) {
+    this.quantity += change;
   }
 
   /**

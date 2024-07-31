@@ -12,12 +12,12 @@ export class QuantitySelectComponent {
   @Output() onClick = new EventEmitter<number>()
 
   onIncrementClick() {
-    this.onClick.emit(this.quant+1)
+    this.onClick.emit(1);
   }
 
   onDecrementClick() {
     if(this.quant > 1) {
-      this.onClick.emit(this.quant-1)
+      this.onClick.emit(-1);
     }
   }
 }

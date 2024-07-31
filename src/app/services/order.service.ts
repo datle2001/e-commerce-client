@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Order, OrderedProduct } from '../models/order';
 import { OrderState } from '../shared/enums';
@@ -28,15 +28,11 @@ export class OrderServices {
    * @returns
    */
   getOrderById(orderId: string): Observable<any> {
-    this.spinnerService.show = true;
     return this.http
       .get<any>(`${this.orderUrl}/${orderId}`, {
         headers: this.loginServices.getHeaders(),
       })
-      .pipe((m) => {
-        this.spinnerService.show = false;
-        return m;
-      });
+      .pipe(take(1));
   }
 
   /**
@@ -44,16 +40,11 @@ export class OrderServices {
    * @returns
    */
   createOrder(): Observable<any> {
-    this.spinnerService.show = true;
-
     return this.http
       .post(this.orderUrl, this.cartServices.selectedProducts, {
         headers: this.loginServices.getHeaders(),
       })
-      .pipe((m) => {
-        this.spinnerService.show = false;
-        return m;
-      });
+      .pipe(take(1));
   }
 
   initOrderFrom(rawOrder: any[]): Order {

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { SelectedProduct } from '../models/selected-product';
 import { LocalStorageService } from './local-storage.service';
+import { ProductServices } from './product.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,12 @@ export class CartService {
   );
   readonly selectedProducts$ = this._selectedProducts.asObservable();
 
-  constructor(private localStorageService: LocalStorageService) {}
+  constructor(
+    private localStorageService: LocalStorageService,
+    private productService: ProductServices
+  ) {
+    this.getSelectedProductsFromLocalStorage();
+  }
 
   get selectedProducts(): SelectedProduct[] {
     return this._selectedProducts.getValue();
@@ -50,7 +56,7 @@ export class CartService {
    * Count total number of products in cart
    * @returns total number of products
    */
-  countProducts(): number {    
+  countProducts(): number {
     return this.selectedProducts.reduce((sum, sp) => sum + sp.quantity, 0);
   }
 
@@ -63,5 +69,30 @@ export class CartService {
       (sum, sp) => sum + sp.product.price! * sp.quantity,
       0
     );
+  }
+
+  private getSelectedProductsFromLocalStorage() {
+    const localSPs = this.localStorageService.getLocalSelectedProducts();
+
+    if (localSPs && localSPs.length > 0) {
+      let selectedProducts: SelectedProduct[] = [];
+      const productIds = localSPs.map((lsp) => lsp.id).toString();
+
+      this.productService.getProducts({ productIds }).subscribe({
+        next: (products) => {
+          products.forEach((product) => {
+            selectedProducts.push({
+              product,
+              quantity: localSPs.find((lsp) => lsp.id === product.id)!.quantity,
+            });
+          });
+
+          this.selectedProducts = selectedProducts;
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      });
+    }
   }
 }

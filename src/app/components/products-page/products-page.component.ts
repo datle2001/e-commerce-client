@@ -80,9 +80,7 @@ export class ProductsPageComponent implements OnDestroy, OnInit {
         pageIndex: this.pageIndex + 1,
       })
       .subscribe({
-        next: (products) => {
-          console.log(products);
-          
+        next: (products) => {          
           this.products = products;
           this.spinnerService.show = false;
         },

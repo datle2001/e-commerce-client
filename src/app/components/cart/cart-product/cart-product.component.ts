@@ -38,7 +38,10 @@ export class CartProductComponent {
     );
   }
 
-  protected setQuantitySelect($event: number) {
-    this.selectedProduct!.quantity = $event;
+  protected setQuantitySelect(change: number) {
+    this.cartServices.addProduct({
+      product: this.selectedProduct!.product,
+      quantity: change
+    });
   }
 }
