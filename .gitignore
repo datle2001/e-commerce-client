@@ -35,7 +35,7 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
-src/environments/.env
+/src/environments/*
 /image-header
 /image-welcome-page
 /products
