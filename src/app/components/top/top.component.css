@@ -13,7 +13,7 @@
 
 #nav-links {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   font-size: 27px;
   font-weight: 300;
   overflow: hidden;

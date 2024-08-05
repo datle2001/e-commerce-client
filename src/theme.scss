@@ -19,4 +19,3 @@ html {
   // Apply the base theme at the root, so it will be inherited by the whole app.
   @include mat.all-component-themes($theme);
 }
-@include mat.all-component-themes($theme);
