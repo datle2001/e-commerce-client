@@ -50,6 +50,6 @@ export class ProductBoxComponent {
   }
 
   setQuantitySelect(change: number) {
-    this.quantity += change;
+    this.quantity = change;
   }
 }
