@@ -7,6 +7,8 @@ import { LoginServices } from 'src/app/services/login.service';
 import { SpinnerComponent } from '../shared/spinner/spinner.component';
 import { LoginPageComponent } from './login-page.component';
 import { testLoginInfo } from 'src/app/shared/test/data';
+import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('LoginPageComponent', () => {
   let component: LoginPageComponent;
@@ -14,25 +16,28 @@ describe('LoginPageComponent', () => {
   let emailInput: HTMLInputElement;
   let passwordInput: HTMLInputElement;
   let loginButton: HTMLButtonElement;
-  let loginServices: LoginServices;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach( () => {
+    TestBed.configureTestingModule({
       imports: [
         HttpClientModule,
         ToastrModule.forRoot(),
         MatProgressSpinnerModule,
+        SpinnerComponent,
+        LoginPageComponent,
+        RouterModule.forRoot([]),
+        BrowserAnimationsModule
       ],
-      declarations: [NgModel, NgForm, SpinnerComponent, LoginPageComponent],
-    }).compileComponents();
+      declarations: [NgModel, NgForm],
+    });
 
     fixture = TestBed.createComponent(LoginPageComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    fixture.autoDetectChanges();
 
     const nativeElement: HTMLElement = fixture.nativeElement;
-    emailInput = nativeElement.querySelector('input[name="email"]')!;
-    passwordInput = nativeElement.querySelector('input[name="password"]')!;
+    emailInput = nativeElement.querySelector('input[formControlName="email"]')!;
+    passwordInput = nativeElement.querySelector('input[formControlName="password"]')!;
     loginButton = nativeElement.querySelector('button')!;
   });
 
@@ -40,24 +45,31 @@ describe('LoginPageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('email textbox, password textbox, login button should exist', () => {
-    expect(emailInput).toBeTruthy();
-    expect(passwordInput).toBeTruthy();
-    expect(loginButton).toBeTruthy();
-  });
-
   it('should disable Login button when there is no input', () => {
     expect(loginButton.disabled).toBeTrue();
   });
 
-  // it('should enable Login button when there are email and password inputs', async () => {
-  //   component.loginInfo.email = testLoginInfo.email;
-  //   component.loginInfo.password = testLoginInfo.password;
+  it('should disable Login button when there is no email input', async () => {
+    emailInput.value = testLoginInfo.email;
+    emailInput.dispatchEvent(new Event('input'));
+    await fixture.whenStable();
+    expect(loginButton.disabled).toBeTrue();
+  });
 
-  //   fixture.detectChanges();
+  it('should disable Login button when there is no password input', async () => {
+    passwordInput.value = testLoginInfo.password;
+    passwordInput.dispatchEvent(new Event('input'));
+    await fixture.whenStable();
+    expect(loginButton.disabled).toBeTrue();
+  });
 
-  //   fixture.whenStable().then(() => {
-  //     expect(loginButton.disabled).toBeFalse();
-  //   });
-  // });
+  it('should enable Login button when there are email and password inputs', async () => {
+    emailInput.value = testLoginInfo.email;
+    emailInput.dispatchEvent(new Event('input'));
+    passwordInput.value = testLoginInfo.password;
+    passwordInput.dispatchEvent(new Event('input'));
+
+    await fixture.whenStable();
+    expect(loginButton.disabled).toBeFalse();
+  });
 });

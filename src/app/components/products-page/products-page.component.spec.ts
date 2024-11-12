@@ -4,6 +4,7 @@ import { ProductsPageComponent } from './products-page.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { QuantitySelectComponent } from '../shared/quantity-select/quantity-select.component';
 import { SpinnerComponent } from '../shared/spinner/spinner.component';
+import { ToastrModule } from 'ngx-toastr';
 
 describe('ProductsPageComponent', () => {
   let component: ProductsPageComponent;
@@ -11,8 +12,15 @@ describe('ProductsPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientModule, MatProgressSpinnerModule],
-      declarations: [ProductsPageComponent, SpinnerComponent, QuantitySelectComponent],
+      imports: [
+        HttpClientModule,
+        MatProgressSpinnerModule,
+        ProductsPageComponent,
+        SpinnerComponent,
+        QuantitySelectComponent,
+        ToastrModule.forRoot()
+      ],
+      declarations: [],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProductsPageComponent);

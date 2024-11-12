@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserPageComponent } from './user-page.component';
+import { HttpClient, HttpHandler } from '@angular/common/http';
+import { NgbToastConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { ToastServices } from 'src/app/services/toast.service';
 
 describe('UserPageComponent', () => {
   let component: UserPageComponent;
@@ -8,7 +12,8 @@ describe('UserPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UserPageComponent ]
+      imports: [ UserPageComponent, ToastrModule.forRoot() ],
+      providers: [HttpClient, HttpHandler]
     })
     .compileComponents();
 

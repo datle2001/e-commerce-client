@@ -5,6 +5,8 @@ import { MatDividerModule } from "@angular/material/divider";
 import { NgbRatingModule } from "@ng-bootstrap/ng-bootstrap";
 import { StarComponent } from "../../shared/star/star.component";
 import { QuantitySelectComponent } from "../../shared/quantity-select/quantity-select.component";
+import { HttpClientModule } from "@angular/common/http";
+import { RouterModule } from "@angular/router";
 
 describe('ProductBoxComponent', () => {
   let component: ProductBoxComponent;
@@ -12,8 +14,17 @@ describe('ProductBoxComponent', () => {
 
   beforeEach( async () => {
     await TestBed.configureTestingModule({
-      imports: [ToastrModule.forRoot(), MatDividerModule, NgbRatingModule],
-      declarations:[ProductBoxComponent, StarComponent, QuantitySelectComponent]
+      imports: [
+        ToastrModule.forRoot(),
+        MatDividerModule,
+        NgbRatingModule,
+        ProductBoxComponent,
+        StarComponent,
+        QuantitySelectComponent,
+        HttpClientModule,
+        RouterModule.forRoot([])
+      ],
+      declarations: [],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProductBoxComponent);

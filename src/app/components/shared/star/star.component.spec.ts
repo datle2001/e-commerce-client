@@ -8,10 +8,9 @@ describe('StarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NgbRatingModule],
-      declarations: [ StarComponent ]
-    })
-    .compileComponents();
+      imports: [NgbRatingModule, StarComponent],
+      declarations: [],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(StarComponent);
     component = fixture.componentInstance;

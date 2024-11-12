@@ -8,7 +8,7 @@ describe('ConfirmationProductComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ConfirmationProductComponent ]
+      imports: [ ConfirmationProductComponent ]
     })
     .compileComponents();
 

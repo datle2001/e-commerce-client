@@ -12,8 +12,15 @@ describe('ProductDetailPageComponent', () => {
   
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ToastrModule.forRoot(), RouterModule.forRoot([]), HttpClientModule, MatProgressSpinnerModule],
-      declarations: [ProductDetailPageComponent, SpinnerComponent],
+      imports: [
+        ToastrModule.forRoot(),
+        RouterModule.forRoot([]),
+        HttpClientModule,
+        MatProgressSpinnerModule,
+        ProductDetailPageComponent,
+        SpinnerComponent,
+      ],
+      declarations: [],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProductDetailPageComponent);

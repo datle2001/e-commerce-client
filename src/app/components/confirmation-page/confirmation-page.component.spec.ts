@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ConfirmationPageComponent } from './confirmation-page.component';
@@ -12,8 +11,14 @@ describe('ConfirmationPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientModule, RouterModule.forRoot([]), MatProgressSpinnerModule],
-      declarations: [SpinnerComponent, ConfirmationPageComponent],
+      imports: [
+        HttpClientModule,
+        RouterModule.forRoot([]),
+        MatProgressSpinnerModule,
+        SpinnerComponent,
+        ConfirmationPageComponent,
+      ],
+      declarations: [],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ConfirmationPageComponent);

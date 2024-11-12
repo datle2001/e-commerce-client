@@ -17,8 +17,10 @@ describe('AppComponent', () => {
         ToastrModule.forRoot(),
         RouterModule.forRoot([]),
         MatBadgeModule,
+        TopComponent,
+        AppComponent,
       ],
-      declarations: [TopComponent, AppComponent],
+      declarations: [],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);

@@ -11,7 +11,7 @@ describe('QuantitySelectComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ QuantitySelectComponent ]
+      imports: [ QuantitySelectComponent ]
     })
     .compileComponents();
 

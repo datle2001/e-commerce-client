@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { QuantitySelectComponent } from '../shared/quantity-select/quantity-select.component';
 import { SpinnerComponent } from '../shared/spinner/spinner.component';
+import { RouterModule } from '@angular/router';
 
 describe('CartComponent', () => {
   let component: CartComponent;
@@ -12,8 +13,16 @@ describe('CartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ToastrModule.forRoot(), HttpClientModule, MatProgressSpinnerModule],
-      declarations: [SpinnerComponent, QuantitySelectComponent, CartComponent],
+      imports: [
+        ToastrModule.forRoot(),
+        HttpClientModule,
+        MatProgressSpinnerModule,
+        SpinnerComponent,
+        QuantitySelectComponent,
+        CartComponent,
+        RouterModule.forRoot([])
+      ],
+      declarations: [],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CartComponent);
