@@ -56,7 +56,7 @@ export class OrderServices {
       let orderedProduct: OrderedProduct = {
         product,
         canFulfill: rawOrderedProduct.can_fulfill,
-        quantity: rawOrderedProduct.ordered_quantity,
+        quantity: rawOrderedProduct.quantity,
       };
 
       order.orderedProducts.push(orderedProduct);

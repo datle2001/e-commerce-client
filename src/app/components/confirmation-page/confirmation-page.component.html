@@ -1,5 +1,5 @@
 <div class="route-container">
-  <div *ngIf="confirmedOrder">
+  <div *ngIf="(confirmedOrder$ | async) as confirmedOrder">
     <div [style]="{ textAlign: 'center', marginTop: '50px' }">
       <h1>Thank you for shopping with us!</h1>
       <h2>Here is a summary of your order</h2>

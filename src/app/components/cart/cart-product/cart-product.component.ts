@@ -38,7 +38,7 @@ export class CartProductComponent {
     );
   }
 
-  protected setQuantitySelect(change: number) {
+  protected setQuantitySelect(change: number): void {
     this.cartServices.addProduct({
       product: this.selectedProduct!.product,
       quantity: change

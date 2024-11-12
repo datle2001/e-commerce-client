@@ -50,8 +50,8 @@ export class ProductDetailPageComponent {
     });
   }
 
-  protected setQuantitySelect(change: number) {
-    this.quantity += change;
+  protected setQuantitySelect(change: number): void {
+    this.quantity = change;
   }
 
   /**

@@ -17,7 +17,7 @@ export class StarComponent {
  @Output()
  onRatingChange: EventEmitter<number> = new EventEmitter<number>();
 
- protected onRatingClick(newRating: number) {
+ protected onRatingClick(newRating: number): void {
   this.onRatingChange.emit(newRating);
  }
 }

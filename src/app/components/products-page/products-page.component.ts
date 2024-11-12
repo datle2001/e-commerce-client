@@ -10,6 +10,8 @@ import { ProductBoxComponent } from './product-box/product-box.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { Subject } from 'rxjs';
 import { SpinnerService } from 'src/app/services/spinner.service';
+import { ToastServices } from 'src/app/services/toast.service';
+import { ToastType } from 'src/app/shared/enums';
 
 @Component({
   templateUrl: './products-page.component.html',
@@ -37,7 +39,8 @@ export class ProductsPageComponent implements OnDestroy, OnInit {
 
   constructor(
     protected productServices: ProductServices,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
+    private toastService: ToastServices
   ) {}
 
   ngOnInit(): void {
@@ -84,6 +87,10 @@ export class ProductsPageComponent implements OnDestroy, OnInit {
           this.products = products;
           this.spinnerService.show = false;
         },
-    });
+        error: (err) => {
+          this.toastService.showToast('Sorry, we cannot fetch the products', ToastType.ERROR)
+          this.spinnerService.show = false;
+        }
+      });
   }
 }

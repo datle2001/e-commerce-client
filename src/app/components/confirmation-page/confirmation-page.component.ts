@@ -1,44 +1,38 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Order } from 'src/app/models/order';
 import { CartService } from 'src/app/services/cart.service';
 import { OrderServices } from 'src/app/services/order.service';
 import { SpinnerComponent } from '../shared/spinner/spinner.component';
 import { ConfirmationProductComponent } from './confirmation-product/confirmation-product.component';
+import { catchError, filter, map, Observable, of, switchMap, tap } from 'rxjs';
 
 @Component({
   templateUrl: './confirmation-page.component.html',
   styleUrls: ['./confirmation-page.component.css'],
   standalone: true,
-  imports: [SpinnerComponent, NgFor, NgIf, ConfirmationProductComponent],
+  imports: [SpinnerComponent, CommonModule, ConfirmationProductComponent],
 })
-export class ConfirmationPageComponent implements OnInit {
+export class ConfirmationPageComponent {
   constructor(
     private cartServices: CartService,
     protected orderServices: OrderServices,
     private route: ActivatedRoute
   ) {}
 
-  protected confirmedOrder: Order | undefined;
-  protected orderId: string = '';
+  protected orderId$ = this.route.paramMap.pipe(
+    map((params) => params.get('id'))
+  );
 
-  ngOnInit(): void {
-    this.orderId = this.route.snapshot.paramMap.get('id')!;
-    this.cartServices.removeAllProducts();
-    this.getOrder();
-  }
-
-  private getOrder(): void {
-    this.orderServices.getOrderById(this.orderId).subscribe({
-      next: (rawOrder: any[]) => {
-        console.log(rawOrder);
-
-        this.confirmedOrder = this.orderServices.initOrderFrom(rawOrder);
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
-  }
+  protected confirmedOrder$: Observable<Order | undefined> = this.orderId$.pipe(
+    filter((id) => Boolean(id)),
+    switchMap((id) => this.orderServices.getOrderById(id!)),
+    tap(() => this.cartServices.removeAllProducts()),
+    map((order) => this.orderServices.initOrderFrom(order)),
+    catchError((err) => {
+      console.error(err);
+      return of(undefined);
+    })
+  );
 }

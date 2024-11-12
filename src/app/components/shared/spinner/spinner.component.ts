@@ -1,7 +1,6 @@
-import { NgIf } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { Component } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { Subject, takeUntil } from 'rxjs';
 import { SpinnerService } from 'src/app/services/spinner.service';
 
 @Component({
@@ -9,24 +8,10 @@ import { SpinnerService } from 'src/app/services/spinner.service';
   templateUrl: './spinner.component.html',
   styleUrls: ['./spinner.component.css'],
   standalone: true,
-  imports: [MatProgressSpinnerModule, NgIf],
+  imports: [MatProgressSpinnerModule, NgIf, AsyncPipe],
 })
-export class SpinnerComponent implements OnInit, OnDestroy {
-  private destroyed = new Subject<void>();
-  protected show: boolean | undefined;
+export class SpinnerComponent {
+  protected show$ = this.spinnerService.show$;
 
   constructor(protected spinnerService: SpinnerService) {}
-
-  ngOnInit(): void {
-    this.spinnerService.show$.pipe(takeUntil(this.destroyed)).subscribe({
-      next: (show) => {
-        this.show = show;
-      }
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.destroyed.next();
-    this.destroyed.complete();
-  }
 }

@@ -88,11 +88,8 @@ export class TopComponent implements OnInit, OnDestroy {
   protected onAccountLogoClick() {
     if (this.loginServices.hasLoggedIn()) {
       this.loginServices.logout().subscribe({
-        next: () => {
-          this.toastServices.showToast(
-            'You have successfully logged out',
-            ToastType.SUCCESS
-          );
+        next: (message) => {          
+          this.toastServices.showToast(message, ToastType.SUCCESS);
           this.loginServices.logoutUser();
         },
         error: (error) => {

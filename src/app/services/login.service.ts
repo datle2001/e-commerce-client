@@ -4,7 +4,6 @@ import { BehaviorSubject, Observable, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoginInfo } from '../models/login-info';
 import { LoginState } from '../shared/enums';
-import { SpinnerService } from './spinner.service';
 import { LocalStorageService } from './local-storage.service';
 import { Token } from '../models/token';
 import { User } from '../models/user';

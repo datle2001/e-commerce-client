@@ -59,9 +59,7 @@ export class RegisterPageComponent {
 
     this.spinnerService.show = true;
     this.loginService.signup(signupInfo).subscribe({
-      next: (token) => {  
-        console.log(token);
-              
+      next: (token) => {
         this.spinnerService.show = false;
         this.loginService.loginUser(token);
         this.router.navigateByUrl('/');

@@ -11,13 +11,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router, RouterLink } from '@angular/router';
-import { Subject, take, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
 import { LoginServices } from 'src/app/services/login.service';
 import { ToastServices } from 'src/app/services/toast.service';
-import { LoginState, ToastType } from 'src/app/shared/enums';
+import { ToastType } from 'src/app/shared/enums';
 import { SpinnerComponent } from '../shared/spinner/spinner.component';
 import { SpinnerService } from 'src/app/services/spinner.service';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'login-page',
