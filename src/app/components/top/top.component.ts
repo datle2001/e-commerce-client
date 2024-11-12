@@ -9,10 +9,9 @@ import { Router, RouterLink } from '@angular/router';
 import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 import { Subject } from 'rxjs/internal/Subject';
 import { CartService } from 'src/app/services/cart.service';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { LoginServices } from 'src/app/services/login.service';
 import { ToastServices } from 'src/app/services/toast.service';
-import { LoginState, ToastType } from 'src/app/shared/enums';
+import { ToastType } from 'src/app/shared/enums';
 import { environment } from 'src/environments/environment';
 
 @Component({

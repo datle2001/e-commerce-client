@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { TopComponent } from '@components/top/top.component';
 import { SpinnerComponent } from './components/shared/spinner/spinner.component';
