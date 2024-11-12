@@ -1,5 +1,5 @@
 <div id="cart-product-container" *ngIf="selectedProduct">
-  <img src="{{ selectedProduct.product.photoUrl }}"/>
+  <img src="{{ selectedProduct.product.photoUrl }}" alt="{{selectedProduct.product.name}}"/>
   <div id="detail-container">
     <p>{{ selectedProduct.product.name }}</p>
     <p>Item #{{ selectedProduct.product.id }}</p>

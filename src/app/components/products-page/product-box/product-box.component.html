@@ -1,6 +1,6 @@
 <div id="product-box">
   <a [routerLink]="['/products', product.id]">
-    <img src="{{ product.photoUrl }}" />
+    <img src="{{ product.photoUrl }}" alt="{{product.name}}"/>
   </a>
   <a [routerLink]="['/products', product.id]">
     <h3 style="font-weight: 600">{{ product.name }}</h3>
