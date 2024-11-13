@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { TopComponent } from '@components/top/top.component';
 import { SpinnerComponent } from './components/shared/spinner/spinner.component';
-import { CartService } from './services/cart.service';
 import { LoginServices } from './services/login.service';
 import { LoginState } from './shared/enums';
 import { LocalStorageService } from './services/local-storage.service';
@@ -17,7 +16,6 @@ import { LocalStorageService } from './services/local-storage.service';
 })
 export class AppComponent implements OnInit {
   constructor(
-    private cartServices: CartService,
     protected loginServices: LoginServices,
     private localStorageService: LocalStorageService,
     private router: Router
@@ -38,8 +36,8 @@ export class AppComponent implements OnInit {
     }
   }
 
-  protected isLoginUrl(): boolean {
-    return (
+  protected shouldShowTopNav(): boolean {
+    return !(
       this.router.url.endsWith('login') || this.router.url.endsWith('register')
     );
   }

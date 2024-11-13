@@ -3,12 +3,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgForm, NgModel } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ToastrModule } from 'ngx-toastr';
-import { LoginServices } from 'src/app/services/login.service';
 import { SpinnerComponent } from '../shared/spinner/spinner.component';
 import { LoginPageComponent } from './login-page.component';
 import { testLoginInfo } from 'src/app/shared/test/data';
-import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('LoginPageComponent', () => {
   let component: LoginPageComponent;
@@ -17,19 +16,19 @@ describe('LoginPageComponent', () => {
   let passwordInput: HTMLInputElement;
   let loginButton: HTMLButtonElement;
 
-  beforeEach( () => {
-    TestBed.configureTestingModule({
+  beforeEach( async() => {
+    await TestBed.configureTestingModule({
       imports: [
         HttpClientModule,
         ToastrModule.forRoot(),
         MatProgressSpinnerModule,
         SpinnerComponent,
         LoginPageComponent,
-        RouterModule.forRoot([]),
+        RouterTestingModule.withRoutes([]),
         BrowserAnimationsModule
       ],
       declarations: [NgModel, NgForm],
-    });
+    }).compileComponents();
 
     fixture = TestBed.createComponent(LoginPageComponent);
     component = fixture.componentInstance;
@@ -71,5 +70,9 @@ describe('LoginPageComponent', () => {
 
     await fixture.whenStable();
     expect(loginButton.disabled).toBeFalse();
+  });
+
+  it('should hide navigation bar', () => {
+    expect(document.querySelector('#nav-bar')).toBeFalsy();
   });
 });

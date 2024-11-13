@@ -1,5 +1,5 @@
 <div id="quant-select-container">
   <button id="left" (click)="onDecrementClick()">-</button>
-  <input value="{{ quant }}" readonly />
+  <input id='quant-display' value={{quant}} readonly type="number"/>
   <button id="right" (click)="onIncrementClick()">+</button>
 </div>

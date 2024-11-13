@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { ProductDetailPageComponent } from "./product-detail-page.component";
 import { ToastrModule } from "ngx-toastr";
-import { RouterModule } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { SpinnerComponent } from "../shared/spinner/spinner.component";
+import { RouterTestingModule } from "@angular/router/testing";
 
 describe('ProductDetailPageComponent', () => {
   let component: ProductDetailPageComponent;
@@ -14,7 +14,7 @@ describe('ProductDetailPageComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         ToastrModule.forRoot(),
-        RouterModule.forRoot([]),
+        RouterTestingModule.withRoutes([]),
         HttpClientModule,
         MatProgressSpinnerModule,
         ProductDetailPageComponent,

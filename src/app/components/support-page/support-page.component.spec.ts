@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SupportPageComponent } from './support-page.component';
 
 describe('SupportComponent', () => {
@@ -9,8 +8,7 @@ describe('SupportComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ SupportPageComponent ]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SupportPageComponent);
     component = fixture.componentInstance;

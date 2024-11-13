@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RegisterPageComponent } from './register-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { By } from '@angular/platform-browser';
 
 describe('RegisterPageComponent', () => {
   let component: RegisterPageComponent;
@@ -19,5 +20,9 @@ describe('RegisterPageComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should hide navigation bar', () => {
+    expect(fixture.debugElement.query(By.css('#nav-bar'))).toBeNull();
   });
 });

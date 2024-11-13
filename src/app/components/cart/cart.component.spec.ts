@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { QuantitySelectComponent } from '../shared/quantity-select/quantity-select.component';
 import { SpinnerComponent } from '../shared/spinner/spinner.component';
-import { RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('CartComponent', () => {
   let component: CartComponent;
@@ -20,7 +20,7 @@ describe('CartComponent', () => {
         SpinnerComponent,
         QuantitySelectComponent,
         CartComponent,
-        RouterModule.forRoot([])
+        RouterTestingModule.withRoutes([])
       ],
       declarations: [],
     }).compileComponents();

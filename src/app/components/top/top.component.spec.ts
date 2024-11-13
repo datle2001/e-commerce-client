@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing"
-import { RouterModule } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http";
 import { ToastrModule } from "ngx-toastr";
 import { TopComponent } from "./top.component";
 import { MatBadgeModule } from "@angular/material/badge";
+import { RouterTestingModule } from "@angular/router/testing";
 
 describe('TopComponent', () => {
   let component: TopComponent;
@@ -14,7 +14,7 @@ describe('TopComponent', () => {
       imports: [
         HttpClientModule,
         ToastrModule.forRoot(),
-        RouterModule.forRoot([]),
+        RouterTestingModule.withRoutes([]),
         MatBadgeModule,
         TopComponent,
       ],

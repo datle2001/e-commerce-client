@@ -1,16 +1,16 @@
-import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing"
+import { ComponentFixture, TestBed } from "@angular/core/testing"
 import { HomePageComponent } from "./home-page.component";
-import { RouterModule } from "@angular/router";
+import { RouterTestingModule } from "@angular/router/testing";
 
 describe('HomePageComponent', () => {
   let component: HomePageComponent;
   let fixture: ComponentFixture<HomePageComponent>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [HomePageComponent, RouterModule.forRoot([])],
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [HomePageComponent, RouterTestingModule.withRoutes([])],
       declarations: [],
-    });
+    }).compileComponents();
 
     fixture = TestBed.createComponent(HomePageComponent);
     component = fixture.componentInstance;

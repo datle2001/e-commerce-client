@@ -1,10 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserPageComponent } from './user-page.component';
-import { HttpClient, HttpHandler } from '@angular/common/http';
-import { NgbToastConfig } from '@ng-bootstrap/ng-bootstrap';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { ToastServices } from 'src/app/services/toast.service';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 
 describe('UserPageComponent', () => {
   let component: UserPageComponent;
@@ -12,10 +10,8 @@ describe('UserPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ UserPageComponent, ToastrModule.forRoot() ],
-      providers: [HttpClient, HttpHandler]
-    })
-    .compileComponents();
+      imports: [ UserPageComponent, ToastrModule.forRoot(), HttpClientModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(UserPageComponent);
     component = fixture.componentInstance;

@@ -6,13 +6,13 @@ import { NgbRatingModule } from "@ng-bootstrap/ng-bootstrap";
 import { StarComponent } from "../../shared/star/star.component";
 import { QuantitySelectComponent } from "../../shared/quantity-select/quantity-select.component";
 import { HttpClientModule } from "@angular/common/http";
-import { RouterModule } from "@angular/router";
+import { RouterTestingModule } from "@angular/router/testing";
 
 describe('ProductBoxComponent', () => {
   let component: ProductBoxComponent;
   let fixture: ComponentFixture<ProductBoxComponent>;
 
-  beforeEach( async () => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         ToastrModule.forRoot(),
@@ -22,13 +22,17 @@ describe('ProductBoxComponent', () => {
         StarComponent,
         QuantitySelectComponent,
         HttpClientModule,
-        RouterModule.forRoot([])
+        RouterTestingModule.withRoutes([])
       ],
       declarations: [],
     }).compileComponents();
 
+    const mockProduct = {id: '1'};
+
     fixture = TestBed.createComponent(ProductBoxComponent);
     component = fixture.componentInstance
+    fixture.componentRef.setInput('product', mockProduct);
+    fixture.detectChanges();
   });
 
   it('should create', () => {

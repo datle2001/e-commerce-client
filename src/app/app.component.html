@@ -1,5 +1,5 @@
 <div id="whole-site">
-  <top-root *ngIf="!isLoginUrl()"/>
+  <top-root *ngIf="shouldShowTopNav()"/>
   <spinner/>
   <router-outlet />
 </div>

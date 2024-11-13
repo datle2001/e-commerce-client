@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
 import { ConfirmationPageComponent } from './confirmation-page.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SpinnerComponent } from '../shared/spinner/spinner.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ConfirmationPageComponent', () => {
   let component: ConfirmationPageComponent;
@@ -13,7 +13,7 @@ describe('ConfirmationPageComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         HttpClientModule,
-        RouterModule.forRoot([]),
+        RouterTestingModule.withRoutes([]),
         MatProgressSpinnerModule,
         SpinnerComponent,
         ConfirmationPageComponent,
