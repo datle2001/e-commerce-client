@@ -4,9 +4,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterLink } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
-import { LoginServices } from 'src/app/services/login.service';
+import { LoginService } from 'src/app/services/login.service';
 import { OrderServices } from 'src/app/services/order.service';
-import { ToastServices } from 'src/app/services/toast.service';
+import { ToastService } from 'src/app/services/toast.service';
 import { OrderState, ToastType } from 'src/app/shared/enums';
 import { redirectTo } from 'src/app/shared/helpers';
 import { SpinnerComponent } from '../shared/spinner/spinner.component';
@@ -29,9 +29,9 @@ import { CartProductComponent } from './cart-product/cart-product.component';
 export class CartComponent {
   constructor(
     protected cartServices: CartService,
-    private toastServices: ToastServices,
+    private toastServices: ToastService,
     protected orderServices: OrderServices,
-    private loginServices: LoginServices
+    private loginServices: LoginService
   ) {}
 
   /**

@@ -3,15 +3,15 @@ import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
-import { ProductServices } from 'src/app/services/product.service';
-import { Product } from 'src/app/models/product';
-import { SpinnerComponent } from '../shared/spinner/spinner.component';
-import { ProductBoxComponent } from './product-box/product-box.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { Subject } from 'rxjs';
+import { Product } from 'src/app/models/product';
+import { ProductService } from 'src/app/services/product.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
-import { ToastServices } from 'src/app/services/toast.service';
+import { ToastService } from 'src/app/services/toast.service';
 import { ToastType } from 'src/app/shared/enums';
+import { SpinnerComponent } from '../shared/spinner/spinner.component';
+import { ProductBoxComponent } from './product-box/product-box.component';
 
 @Component({
   templateUrl: './products-page.component.html',
@@ -26,7 +26,7 @@ import { ToastType } from 'src/app/shared/enums';
     SpinnerComponent,
     FormsModule,
     MatPaginatorModule,
-    AsyncPipe
+    AsyncPipe,
   ],
 })
 export class ProductsPageComponent implements OnDestroy, OnInit {
@@ -38,9 +38,9 @@ export class ProductsPageComponent implements OnDestroy, OnInit {
   protected products: Product[] | undefined;
 
   constructor(
-    protected productServices: ProductServices,
+    protected productServices: ProductService,
     private spinnerService: SpinnerService,
-    private toastService: ToastServices
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -83,14 +83,17 @@ export class ProductsPageComponent implements OnDestroy, OnInit {
         pageIndex: this.pageIndex + 1,
       })
       .subscribe({
-        next: (products) => {          
+        next: (products) => {
           this.products = products;
           this.spinnerService.show = false;
         },
         error: (err) => {
-          this.toastService.showToast('Sorry, we cannot fetch the products', ToastType.ERROR)
+          this.toastService.showToast(
+            'Sorry, we cannot fetch the products',
+            ToastType.ERROR
+          );
           this.spinnerService.show = false;
-        }
+        },
       });
   }
 }

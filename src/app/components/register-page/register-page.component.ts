@@ -13,7 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
-import { LoginServices } from 'src/app/services/login.service';
+import { LoginService } from 'src/app/services/login.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 
 @Component({
@@ -42,7 +42,7 @@ export class RegisterPageComponent {
   });
 
   constructor(
-    private loginService: LoginServices,
+    private loginService: LoginService,
     private spinnerService: SpinnerService,
     private router: Router
   ) {}
@@ -52,7 +52,9 @@ export class RegisterPageComponent {
       firstName: this.registerFormGroup.controls.firstName.value!,
       lastName: this.registerFormGroup.controls.lastName.value!,
       sex: this.registerFormGroup.controls.sex.value!,
-      dob: this.registerFormGroup.controls.dob.value!.toISOString().substring(0, 10),
+      dob: this.registerFormGroup.controls.dob
+        .value!.toISOString()
+        .substring(0, 10),
       email: this.registerFormGroup.controls.email.value!,
       password: this.registerFormGroup.controls.password.value!,
     };

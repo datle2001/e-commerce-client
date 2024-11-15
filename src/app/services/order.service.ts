@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Order, OrderedProduct } from '../models/order';
 import { OrderState } from '../shared/enums';
 import { CartService } from './cart.service';
-import { LoginServices } from './login.service';
+import { LoginService } from './login.service';
 import { SpinnerService } from './spinner.service';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class OrderServices {
   constructor(
     private cartServices: CartService,
     private http: HttpClient,
-    private loginServices: LoginServices,
+    private loginServices: LoginService,
     private spinnerService: SpinnerService
   ) {}
 

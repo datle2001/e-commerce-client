@@ -1,17 +1,17 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, take } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { LoginInfo } from '../models/login-info';
-import { LoginState } from '../shared/enums';
-import { LocalStorageService } from './local-storage.service';
 import { Token } from '../models/token';
 import { User } from '../models/user';
+import { LoginState } from '../shared/enums';
+import { LocalStorageService } from './local-storage.service';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LoginServices {
+export class LoginService {
   constructor(
     private http: HttpClient,
     private localStorageService: LocalStorageService
@@ -37,13 +37,7 @@ export class LoginServices {
     const loginWithTokenUrl = `${environment.api.url}/loginWithToken`;
 
     return this.http
-      .post<Token>(
-        loginWithTokenUrl,
-        {},
-        {
-          headers: this.getHeaders(),
-        }
-      )
+      .post<Token>(loginWithTokenUrl, {}, { headers: this.getHeaders() })
       .pipe(take(1));
   }
 
@@ -51,13 +45,7 @@ export class LoginServices {
     const logoutUrl = `${environment.api.url}/logout`;
 
     return this.http
-      .post(
-        logoutUrl,
-        {},
-        {
-          headers: this.getHeaders(),
-        }
-      )
+      .post(logoutUrl, {}, { headers: this.getHeaders() })
       .pipe(take(1));
   }
 

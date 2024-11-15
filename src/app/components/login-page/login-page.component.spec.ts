@@ -1,13 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgForm, NgModel } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ToastrModule } from 'ngx-toastr';
-import { SpinnerComponent } from '../shared/spinner/spinner.component';
-import { LoginPageComponent } from './login-page.component';
-import { testLoginInfo } from 'src/app/shared/test/data';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ToastrModule } from 'ngx-toastr';
+import { mockLoginInfo } from 'src/app/shared/test/data';
+import { SpinnerComponent } from '../shared/spinner/spinner.component';
+import { LoginPageComponent } from './login-page.component';
 
 describe('LoginPageComponent', () => {
   let component: LoginPageComponent;
@@ -16,7 +16,7 @@ describe('LoginPageComponent', () => {
   let passwordInput: HTMLInputElement;
   let loginButton: HTMLButtonElement;
 
-  beforeEach( async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         HttpClientModule,
@@ -25,7 +25,7 @@ describe('LoginPageComponent', () => {
         SpinnerComponent,
         LoginPageComponent,
         RouterTestingModule.withRoutes([]),
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
       ],
       declarations: [NgModel, NgForm],
     }).compileComponents();
@@ -36,7 +36,9 @@ describe('LoginPageComponent', () => {
 
     const nativeElement: HTMLElement = fixture.nativeElement;
     emailInput = nativeElement.querySelector('input[formControlName="email"]')!;
-    passwordInput = nativeElement.querySelector('input[formControlName="password"]')!;
+    passwordInput = nativeElement.querySelector(
+      'input[formControlName="password"]'
+    )!;
     loginButton = nativeElement.querySelector('button')!;
   });
 
@@ -49,23 +51,23 @@ describe('LoginPageComponent', () => {
   });
 
   it('should disable Login button when there is no email input', async () => {
-    emailInput.value = testLoginInfo.email;
+    emailInput.value = mockLoginInfo.email;
     emailInput.dispatchEvent(new Event('input'));
     await fixture.whenStable();
     expect(loginButton.disabled).toBeTrue();
   });
 
   it('should disable Login button when there is no password input', async () => {
-    passwordInput.value = testLoginInfo.password;
+    passwordInput.value = mockLoginInfo.password;
     passwordInput.dispatchEvent(new Event('input'));
     await fixture.whenStable();
     expect(loginButton.disabled).toBeTrue();
   });
 
   it('should enable Login button when there are email and password inputs', async () => {
-    emailInput.value = testLoginInfo.email;
+    emailInput.value = mockLoginInfo.email;
     emailInput.dispatchEvent(new Event('input'));
-    passwordInput.value = testLoginInfo.password;
+    passwordInput.value = mockLoginInfo.password;
     passwordInput.dispatchEvent(new Event('input'));
 
     await fixture.whenStable();

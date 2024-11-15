@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ActiveToast, ToastrService } from 'ngx-toastr';
-import { ToastType } from '../shared/enums';
 import { Observable, take } from 'rxjs';
+import { ToastType } from '../shared/enums';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ToastServices {
+export class ToastService {
   constructor(private toastr: ToastrService) {}
 
   /**
@@ -23,7 +23,7 @@ export class ToastServices {
       case ToastType.ERROR:
         activeToast = this.toastr.error(message, toastType);
         break;
-      case ToastType.WARNING:
+      default:
         activeToast = this.toastr.warning(message, toastType);
         break;
     }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { SelectedProduct } from '../models/selected-product';
 import { LocalStorageService } from './local-storage.service';
-import { ProductServices } from './product.service';
+import { ProductService } from './product.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,7 @@ export class CartService {
 
   constructor(
     private localStorageService: LocalStorageService,
-    private productService: ProductServices
+    private productService: ProductService
   ) {
     this.getSelectedProductsFromLocalStorage();
   }
@@ -24,7 +24,7 @@ export class CartService {
     return this._selectedProducts.getValue();
   }
 
-  set selectedProducts(sp: SelectedProduct[]) {
+  private set selectedProducts(sp: SelectedProduct[]) {
     this._selectedProducts.next(sp);
     this.localStorageService.saveSelectedProductsToLocal(this.selectedProducts);
   }

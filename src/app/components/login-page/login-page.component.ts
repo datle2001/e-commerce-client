@@ -12,11 +12,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router, RouterLink } from '@angular/router';
 import { Subject } from 'rxjs';
-import { LoginServices } from 'src/app/services/login.service';
-import { ToastServices } from 'src/app/services/toast.service';
+import { LoginService } from 'src/app/services/login.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
+import { ToastService } from 'src/app/services/toast.service';
 import { ToastType } from 'src/app/shared/enums';
 import { SpinnerComponent } from '../shared/spinner/spinner.component';
-import { SpinnerService } from 'src/app/services/spinner.service';
 
 @Component({
   selector: 'login-page',
@@ -30,7 +30,7 @@ import { SpinnerService } from 'src/app/services/spinner.service';
     MatInputModule,
     MatButtonModule,
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -42,10 +42,11 @@ export class LoginPageComponent implements OnDestroy {
   });
 
   constructor(
-    protected loginServices: LoginServices,
+    protected loginServices: LoginService,
     private router: Router,
-    private toastServices: ToastServices,
-    private spinnerService: SpinnerService  ) {}
+    private toastServices: ToastService,
+    private spinnerService: SpinnerService
+  ) {}
 
   protected onSubmit() {
     this.spinnerService.show = true;
@@ -63,12 +64,12 @@ export class LoginPageComponent implements OnDestroy {
             .subscribe({
               next: () => {
                 this.router.navigate(['/']);
-              }
+              },
             });
         },
         error: ({ headers, error }) => {
           this.spinnerService.show = false;
-          
+
           if (error.message === 'Invalid Credentials') {
             this.toastServices.showToast(
               'We cannot find your credentials',

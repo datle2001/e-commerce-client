@@ -1,4 +1,4 @@
-<div id="product-box">
+<div id="product-box" *ngIf="product">
   <a [routerLink]="['/products', product.id]">
     <img src="{{ product.photoUrl }}" alt="{{product.name}}"/>
   </a>

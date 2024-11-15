@@ -27,11 +27,8 @@ describe('ProductBoxComponent', () => {
       declarations: [],
     }).compileComponents();
 
-    const mockProduct = {id: '1'};
-
     fixture = TestBed.createComponent(ProductBoxComponent);
     component = fixture.componentInstance
-    fixture.componentRef.setInput('product', mockProduct);
     fixture.detectChanges();
   });
 

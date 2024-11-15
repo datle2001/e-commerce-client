@@ -5,8 +5,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { CartService } from 'src/app/services/cart.service';
-import { ProductServices } from 'src/app/services/product.service';
-import { ToastServices } from 'src/app/services/toast.service';
+import { ProductService } from 'src/app/services/product.service';
+import { ToastService } from 'src/app/services/toast.service';
 import { ToastType } from 'src/app/shared/enums';
 import { QuantitySelectComponent } from '../shared/quantity-select/quantity-select.component';
 import { SpinnerComponent } from '../shared/spinner/spinner.component';
@@ -28,9 +28,9 @@ import { StarComponent } from '../shared/star/star.component';
 export class ProductDetailPageComponent {
   constructor(
     private route: ActivatedRoute,
-    private productServices: ProductServices,
+    private productServices: ProductService,
     private cartServices: CartService,
-    private toastServices: ToastServices
+    private toastServices: ToastService
   ) {
     this.getProduct();
   }

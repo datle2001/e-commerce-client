@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { TopComponent } from '@components/top/top.component';
 import { SpinnerComponent } from './components/shared/spinner/spinner.component';
-import { LoginServices } from './services/login.service';
-import { LoginState } from './shared/enums';
 import { LocalStorageService } from './services/local-storage.service';
+import { LoginService } from './services/login.service';
+import { LoginState } from './shared/enums';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +16,7 @@ import { LocalStorageService } from './services/local-storage.service';
 })
 export class AppComponent implements OnInit {
   constructor(
-    protected loginServices: LoginServices,
+    protected loginServices: LoginService,
     private localStorageService: LocalStorageService,
     private router: Router
   ) {}

@@ -8,10 +8,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterLink } from '@angular/router';
 import { SpinnerComponent } from '@components/shared/spinner/spinner.component';
 import { User } from 'src/app/models/user';
-import { LoginServices } from 'src/app/services/login.service';
+import { LoginService } from 'src/app/services/login.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
-import { ToastServices } from 'src/app/services/toast.service';
-import { UserServices } from 'src/app/services/user.service';
+import { ToastService } from 'src/app/services/toast.service';
+import { UserService } from 'src/app/services/user.service';
 import { ToastType } from 'src/app/shared/enums';
 
 @Component({
@@ -27,16 +27,16 @@ import { ToastType } from 'src/app/shared/enums';
     MatButtonModule,
     MatDividerModule,
     MatExpansionModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
 })
 export class UserPageComponent implements OnInit {
   constructor(
-    protected loginServices: LoginServices,
-    private toastServices: ToastServices,
+    protected loginServices: LoginService,
+    private toastServices: ToastService,
     private router: Router,
-    private userServices: UserServices,
-    private spinnerService: SpinnerService,
+    private userServices: UserService,
+    private spinnerService: SpinnerService
   ) {}
 
   protected user: User | undefined;
@@ -44,30 +44,27 @@ export class UserPageComponent implements OnInit {
   ngOnInit(): void {
     if (this.loginServices.hasLoggedIn()) {
       this.spinnerService.show = true;
-      this.userServices
-        .getUser()
-        .subscribe({
-          next: (user) => {
-            this.spinnerService.show = false;
-            this.user = user;
-          },
-          error: (error) => {
-            console.error(error);
-          },
-        });
+      this.userServices.getUser().subscribe({
+        next: (user) => {
+          this.spinnerService.show = false;
+          this.user = user;
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      });
     }
   }
 
   onLoginLinkClick() {
     this.spinnerService.show = true;
-    this.toastServices.showToast(
-      'Redirecting you to Login page...',
-      ToastType.WARNING
-    ).subscribe({
-      next: () => {
-        this.spinnerService.show = false;
-        this.router.navigateByUrl('login');
-      },
-    });
+    this.toastServices
+      .showToast('Redirecting you to Login page...', ToastType.WARNING)
+      .subscribe({
+        next: () => {
+          this.spinnerService.show = false;
+          this.router.navigateByUrl('login');
+        },
+      });
   }
 }

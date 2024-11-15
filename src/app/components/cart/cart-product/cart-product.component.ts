@@ -1,8 +1,8 @@
 import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { SelectedProduct } from 'src/app/models/selected-product';
-import { ProductServices } from 'src/app/services/product.service';
-import { ToastServices } from 'src/app/services/toast.service';
+import { ProductService } from 'src/app/services/product.service';
+import { ToastService } from 'src/app/services/toast.service';
 import { ToastType } from 'src/app/shared/enums';
 import { CartService } from '../../../services/cart.service';
 import { QuantitySelectComponent } from '../../shared/quantity-select/quantity-select.component';
@@ -21,8 +21,8 @@ export class CartProductComponent {
 
   constructor(
     private cartServices: CartService,
-    protected productServices: ProductServices,
-    private toastServices: ToastServices
+    protected productServices: ProductService,
+    private toastServices: ToastService
   ) {}
 
   /**
@@ -41,7 +41,7 @@ export class CartProductComponent {
   protected setQuantitySelect(change: number): void {
     this.cartServices.addProduct({
       product: this.selectedProduct!.product,
-      quantity: change
+      quantity: change,
     });
   }
 }

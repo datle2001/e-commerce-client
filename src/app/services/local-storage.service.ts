@@ -6,24 +6,27 @@ import { Token } from '../models/token';
   providedIn: 'root',
 })
 export class LocalStorageService {
-  private readonly SELECTED_PRODUCTS_KEY: string = 'selected-products';
+  readonly SELECTED_PRODUCTS_KEY: string = 'selected-products';
   private readonly TOKEN_KEY: string = 'token';
 
   saveSelectedProductsToLocal(selectedProducts: SelectedProduct[]): void {
-    const localSPs: LocalSelectedProduct[] = selectedProducts.map((sp) => {
+    const storageProducts: StorageProduct[] = selectedProducts.map((sp) => {
       return { id: sp.product.id, quantity: sp.quantity };
     });
 
-    localStorage.setItem(this.SELECTED_PRODUCTS_KEY, JSON.stringify(localSPs));
+    localStorage.setItem(
+      this.SELECTED_PRODUCTS_KEY,
+      JSON.stringify(storageProducts)
+    );
   }
 
-  getLocalSelectedProducts(): LocalSelectedProduct[] | null {
-    const stringSPs = localStorage.getItem(this.SELECTED_PRODUCTS_KEY);
+  getLocalSelectedProducts(): StorageProduct[] | null {
+    const rawStorageProducts = localStorage.getItem(this.SELECTED_PRODUCTS_KEY);
 
-    if (stringSPs) {
-      const localSPs: LocalSelectedProduct[] = JSON.parse(stringSPs);
+    if (rawStorageProducts) {
+      const storageProducts: StorageProduct[] = JSON.parse(rawStorageProducts);
 
-      return localSPs;
+      return storageProducts;
     }
 
     return null;
@@ -53,7 +56,7 @@ export class LocalStorageService {
   }
 }
 
-interface LocalSelectedProduct {
+export interface StorageProduct {
   id: string;
   quantity: number;
 }

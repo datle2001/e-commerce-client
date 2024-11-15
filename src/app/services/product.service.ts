@@ -3,15 +3,15 @@ import { Injectable } from '@angular/core';
 import { Observable, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Product } from '../models/product';
-import { LoginServices } from './login.service';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProductServices {
+export class ProductService {
   private productsUrl = `${environment.api.url}/products`;
 
-  constructor(private http: HttpClient, private loginServices: LoginServices) {}
+  constructor(private http: HttpClient, private loginServices: LoginService) {}
 
   getProducts(requestParams: {
     pageSize?: number;

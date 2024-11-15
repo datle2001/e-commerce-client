@@ -9,8 +9,8 @@ import { Router, RouterLink } from '@angular/router';
 import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 import { Subject } from 'rxjs/internal/Subject';
 import { CartService } from 'src/app/services/cart.service';
-import { LoginServices } from 'src/app/services/login.service';
-import { ToastServices } from 'src/app/services/toast.service';
+import { LoginService } from 'src/app/services/login.service';
+import { ToastService } from 'src/app/services/toast.service';
 import { ToastType } from 'src/app/shared/enums';
 import { environment } from 'src/environments/environment';
 
@@ -37,10 +37,11 @@ export class TopComponent implements OnInit, OnDestroy {
 
   constructor(
     protected cartServices: CartService,
-    protected loginServices: LoginServices,
+    protected loginServices: LoginService,
     private router: Router,
-    private toastServices: ToastServices,
-    private breakpointObserver: BreakpointObserver  ) {}
+    private toastServices: ToastService,
+    private breakpointObserver: BreakpointObserver
+  ) {}
 
   ngOnInit(): void {
     this.breakpointObserver
@@ -77,17 +78,19 @@ export class TopComponent implements OnInit, OnDestroy {
         }
       });
 
-    this.cartServices.selectedProducts$.pipe(takeUntil(this.destroyed)).subscribe({
-      next: () => {
-        this.numProducts = this.cartServices.countProducts();
-      }
-    });
+    this.cartServices.selectedProducts$
+      .pipe(takeUntil(this.destroyed))
+      .subscribe({
+        next: () => {
+          this.numProducts = this.cartServices.countProducts();
+        },
+      });
   }
 
   protected onAccountLogoClick() {
     if (this.loginServices.hasLoggedIn()) {
       this.loginServices.logout().subscribe({
-        next: (message) => {          
+        next: (message) => {
           this.toastServices.showToast(message, ToastType.SUCCESS);
           this.loginServices.logoutUser();
         },
@@ -101,9 +104,8 @@ export class TopComponent implements OnInit, OnDestroy {
         .subscribe({
           next: () => {
             this.router.navigate(['/login']);
-          }
+          },
         });
-      
     }
   }
 
